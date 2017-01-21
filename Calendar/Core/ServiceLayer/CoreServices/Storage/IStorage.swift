@@ -14,6 +14,7 @@ protocol IStorage {
     var readContext: NSManagedObjectContext { get }
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Swift.Void)
+    func performAndSaveBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Swift.Void, completion: @escaping () -> Swift.Void)
     
     func cleanEntity(entityName: String)
 }

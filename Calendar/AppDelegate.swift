@@ -12,9 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    // Dependencies
+    let calendarService = Locator.shared.calendarService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        calendarService.initializeCalendar {
+            let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc = sb.instantiateViewController(withIdentifier: "MainVC")
+            self.window?.rootViewController  = vc
+        }
+        
         return true
     }
 }

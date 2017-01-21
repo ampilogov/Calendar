@@ -10,12 +10,24 @@
 import Foundation
 import CoreData
 
+@objc(DBDay)
 class DBDay: NSManagedObject {
     
     @nonobjc class func fetchRequest() -> NSFetchRequest<DBDay> {
-        return NSFetchRequest<DBDay>(entityName: "Day");
+        return NSFetchRequest<DBDay>(entityName: "Day")
     }
-    
+
     @NSManaged var identifer: Int16
-    @NSManaged var timestamp: Date?
+    @NSManaged var date: Date?
+    
+    func formattedDate() -> String {
+        guard let date = date else {
+            return ""
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        
+        return dateFormatter.string(from: date)
+    }
 }

@@ -13,33 +13,43 @@ import CoreData
 
 class Storage: IStorage {
 
-//    var readContext: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    private(set) var readContext: NSManagedObjectContext
     
     init() {
         
-    }
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-
-        let container = NSPersistentContainer(name: "Calendar")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+        // Init ManagedObjectModel
+        guard let url = Bundle.main.url(forResource: "DataModel", withExtension: "momd") else {
+            fatalError("Can't find data model file")
+        }
+        guard let mom = NSManagedObjectModel(contentsOf: url) else {
+            fatalError("Can't create ManagedObjectModel")
+        }
+        
+        // Init Master Context
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        let masterMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        masterMOC.persistentStoreCoordinator = psc
+        
+        // Init Master Context
+        readContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        readContext.parent = masterMOC
+        
+        // Create PersistentStore
+        let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+        let storeURL = docURL?.appendingPathComponent("DataModel.sqlite")
+        do {
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+        } catch {
+            fatalError("Error migrating store: \(error)")
+        }
+}
     
     // MARK: - IStorage Protocol
     
-    var readContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
+    /// Perform background task in storage with automatic sync save
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Swift.Void) {
-        
+
         DispatchQueue.global().sync {
-            
             let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
             context.parent = self.readContext
             block(context)
@@ -47,28 +57,33 @@ class Storage: IStorage {
         }
     }
     
+    func performAndSaveBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void, completion: @escaping () -> Swift.Void) {
+        
+        DispatchQueue.global().sync {
+            let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            context.parent = self.readContext
+            block(context)
+            self.saveChanges(context)
+            completion()
+        }
+    }
+    
+    /// Delete all objects from Entity
     func cleanEntity(entityName: String) {
         
-        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.parent = readContext
-        
-        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
-        
-        do {
-            if let fetchResults = try context.fetch(request) as? [NSManagedObject] {
-                for event in fetchResults {
-                    context.delete(event)
+        performBackgroundTask { (context) in
+            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+            
+            do {
+                if let fetchResults = try context.fetch(request) as? [NSManagedObject] {
+                    for event in fetchResults {
+                        context.delete(event)
+                    }
                 }
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
-        do {
-            try context.save()
-        } catch {
-            print("\(error)")
         }
     }
 

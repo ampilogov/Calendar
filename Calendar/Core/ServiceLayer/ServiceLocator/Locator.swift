@@ -12,7 +12,7 @@ class Locator {
     
     static let shared = Locator()
     
-    private var services = [String : Any]()
+    private var services = [String: Any]()
     
     init() {
         services[String(describing: type(of: IStorage.self))] = Storage()
