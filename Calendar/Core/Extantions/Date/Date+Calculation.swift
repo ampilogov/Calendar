@@ -11,11 +11,10 @@ import Foundation
 extension Date {
     
     func date(byAddingDays numberOfDays: Int) -> Date? {
-        
-        let calendar = Calendar.current
+
         var components = DateComponents()
         components.day = numberOfDays
-        let resultDate = calendar.date(byAdding: components, to: self)
+        let resultDate = Calendar.GMT.date(byAdding: components, to: self)
         
         return resultDate
     }

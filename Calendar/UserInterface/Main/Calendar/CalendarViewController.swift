@@ -13,7 +13,11 @@ private struct Config {
     static let minOffset: CGFloat = 100.0
 }
 
-class CalendarViewController: UIViewController, NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class CalendarViewController:   UIViewController,
+                                IDayUpdatable,
+                                NSFetchedResultsControllerDelegate,
+                                UICollectionViewDataSource,
+                                UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,13 +26,15 @@ class CalendarViewController: UIViewController, NSFetchedResultsControllerDelega
     private let calendarService = Locator.shared.calendarService()
     private var fetchedResultsController: NSFetchedResultsController<DBDay>
     
+    weak var delegate: CalendarViewControllerDelegate?
+    
+    // MARK: - Livecycle
+    
     required init?(coder aDecoder: NSCoder) {
         fetchedResultsController = calendarService.createFetchedResultsController()
         super.init(coder: aDecoder)
         fetchedResultsController.delegate = self
     }
-    
-    // MARK: - Live Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,13 @@ class CalendarViewController: UIViewController, NSFetchedResultsControllerDelega
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: itemSize, height: itemSize)
         }
+    }
+    
+    // MARK: - IDayUpdatable
+    
+    func update(day: DBDay) {
+        let indexPath = fetchedResultsController.indexPath(forObject: day)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
     }
     
     // MARK: - User Actions
@@ -63,13 +76,20 @@ class CalendarViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.className, for: indexPath)
         if let day = fetchedResultsController.fetchedObjects?[indexPath.row],
             let cell = cell as? DayCollectionCell {
             cell.titleLabel.text = day.formattedDate()
         }
         
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedDay = fetchedResultsController.object(at: indexPath)
+        delegate?.didSelectDay(selectedDay)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

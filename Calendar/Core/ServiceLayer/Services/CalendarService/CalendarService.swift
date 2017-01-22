@@ -15,7 +15,7 @@ class CalendarService: ICalendarService {
     private var storage: IStorage
     
     var currentDate: Date {
-        return Calendar.current.startOfDay(for: Date())
+        return Calendar.GMT.startOfDay(for: Date())
     }
     
     init(storage: IStorage) {
@@ -25,13 +25,17 @@ class CalendarService: ICalendarService {
     // Mark: - ICalendarService Protocol
     
     func createFetchedResultsController() -> NSFetchedResultsController<DBDay> {
+        return createFetchedResultsController(sectionName: nil)
+    }
+    
+    func createFetchedResultsController(sectionName: String?) -> NSFetchedResultsController<DBDay> {
         
         let fetchRequest = createDaysRequest()
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.fetchBatchSize = Const.batchSize
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: storage.readContext,
-                                                                  sectionNameKeyPath: nil,
+                                                                  sectionNameKeyPath: sectionName,
                                                                   cacheName: nil)
 
         do {
@@ -55,6 +59,16 @@ class CalendarService: ICalendarService {
                     let day = DBDay(context: context)
                     day.date = lastDate
                     lastDate = nextDate
+                    
+                    let event1 = DBEvent(context: context)
+                    event1.title = "1111111"
+                    event1.startDate = lastDate
+                    let event2 = DBEvent(context: context)
+                    event2.title = "222222"
+                    event2.location = "San Francisco"
+                    event2.startDate = lastDate.date(byAddingDays: 1)!
+                    
+                    day.events = [event1, event2]
                 }
             }
         }) { 

@@ -7,7 +7,6 @@
 //  This file was automatically generated and should not be edited.
 //
 
-import Foundation
 import CoreData
 
 @objc(DBDay)
@@ -19,6 +18,7 @@ class DBDay: NSManagedObject {
 
     @NSManaged var identifer: Int16
     @NSManaged var date: Date?
+    @NSManaged var events: Set<DBEvent>
     
     func formattedDate() -> String {
         guard let date = date else {

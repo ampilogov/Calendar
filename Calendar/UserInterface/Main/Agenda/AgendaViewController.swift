@@ -14,34 +14,49 @@ private struct Config {
     static let rowHeight: CGFloat = 44.0
 }
 
-class AgendaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let calendarService = Locator.shared.calendarService()
-    var fetchedResultsController: NSFetchedResultsController<DBDay>
+    private let calendarService = Locator.shared.calendarService()
+    private let fetchedResultsController: NSFetchedResultsController<DBDay>
+    private let cellConfigurator = EventCellConfigurator()
 
+    weak var delegate: AgendaViewControllerDelegate?
+
+    // MARK: - Livecycle
+    
     required init?(coder aDecoder: NSCoder) {
-        fetchedResultsController = calendarService.createFetchedResultsController()
+        fetchedResultsController = calendarService.createFetchedResultsController(sectionName: "date")
         super.init(coder: aDecoder)
         fetchedResultsController.delegate = self
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerCells()
         setupScrollPosition()
+    }
+
+    func registerCells() {
+        let eventCellNib = UINib(nibName: EventCell.className, bundle: Bundle.main)
+        tableView.register(eventCellNib, forCellReuseIdentifier: EventCell.className)
     }
     
     func setupScrollPosition() {
         guard let currentDay = calendarService.fetchCurrentDay() else {
             return
         }
-        
-        guard let currentIndexPath = fetchedResultsController.indexPath(forObject: currentDay) else {
+        update(day: currentDay)
+    }
+    
+    // MARK: - IDayUpdatable Prorocol
+    
+    func update(day: DBDay) {
+        guard let indexPath = fetchedResultsController.indexPath(forObject: day) else {
             return
         }
-        
-        tableView.scrollToRow(at: currentIndexPath, at: .top, animated: true)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 
     // MARK: - User Actions
@@ -56,17 +71,50 @@ class AgendaViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     // MARK: - UITableViewDataSource
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.fetchedResultsController.sections?.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        let day = self.day(at: section)
+
+        if day.events.count > 0 {
+            return day.events.count
+        } else {
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if let day = fetchedResultsController.fetchedObjects?[indexPath.row] {
-            cell.textLabel?.text = day.formattedDate()
+
+        var cell = UITableViewCell()
+        
+        if let event = self.event(at: indexPath),
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: EventCell.className, for: indexPath) as? EventCell {
+            
+            cellConfigurator.configure(eventCell, with: event)
+            cell = eventCell
+            
+        } else {
+            cell.textLabel?.text = "NO Events"
         }
         
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let day = self.day(at: section)
+        return day.formattedDate()
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -87,10 +135,43 @@ class AgendaViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        addDaysIfNeeded(in: scrollView)
+        handleDayChange()
+    }
+
+    private func addDaysIfNeeded(in scrollView: UIScrollView) {
         let minButtomOffset = scrollView.contentOffset.y + self.view.frame.size.height + Config.minOffset
         if  scrollView.contentSize.height <= minButtomOffset {
             calendarService.addDaysAfter()
         }
+    }
+
+    private func handleDayChange() {
+        guard let firstVisibleCell = tableView.visibleCells.first,
+            let indexPath = tableView.indexPath(for: firstVisibleCell) else {
+            return
+        }
+        
+        let firstVisibleDay = self.day(at: indexPath.section)
+        delegate?.didScrollToDay(firstVisibleDay)
+    }
+
+    // MARK: - Helpers
+
+    func day(at section: Int) -> DBDay {
+        return fetchedResultsController.object(at: IndexPath(row: 0, section: section))
+    }
+
+    func event(at indexPath: IndexPath) -> DBEvent? {
+        let day = self.day(at: indexPath.section)
+
+        guard day.events.count > indexPath.row else {
+            return nil
+        }
+
+        let events = day.events.sorted { $0.startDate < $1.startDate }
+
+        return events[indexPath.row]
     }
 
 }

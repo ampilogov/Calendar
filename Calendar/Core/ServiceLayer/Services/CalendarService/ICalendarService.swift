@@ -13,6 +13,7 @@ protocol ICalendarService {
     
     /// FetchedResultsController
     func createFetchedResultsController() -> NSFetchedResultsController<DBDay>
+    func createFetchedResultsController(sectionName: String?) -> NSFetchedResultsController<DBDay>
     
     /// Prepare Calendar
     func initializeCalendar(completion: @escaping () -> Swift.Void)

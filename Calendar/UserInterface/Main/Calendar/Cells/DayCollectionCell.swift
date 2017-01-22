@@ -10,4 +10,32 @@ import UIKit
 
 class DayCollectionCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    
+    override var isSelected: Bool {
+        get {
+            return super.isSelected
+        }
+        set {
+            super.isSelected = newValue
+            if newValue {
+                backgroundColor = .red
+            } else {
+                backgroundColor = .green
+            }
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        get {
+            return super.isHighlighted
+        }
+        set {
+            super.isHighlighted = newValue
+            if newValue {
+                backgroundColor = .orange
+            } else {
+                backgroundColor = .green
+            }
+        }
+    }
 }

@@ -22,9 +22,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-91-QDC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-91-QDC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="SrS-Ka-WVW"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="oLZ-1N-Cka"/>
@@ -39,25 +39,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="I8z-91-QDC" secondAttribute="bottom" id="zET-Gb-ltV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kna-la-V5F">
-                        <barButtonItem key="leftBarButtonItem" title="delete" id="y47-X8-1KG">
-                            <connections>
-                                <action selector="deleteAction:" destination="BYZ-38-t0r" id="nye-Hx-z9j"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="add" id="S8n-Sn-Zdt">
-                            <connections>
-                                <action selector="addAction:" destination="BYZ-38-t0r" id="Nac-ua-BpA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="kna-la-V5F"/>
                     <connections>
                         <outlet property="tableView" destination="I8z-91-QDC" id="NEg-Em-jxl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1094" y="682"/>
+            <point key="canvasLocation" x="212" y="662.96851574212894"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="x1a-zK-gBU">
@@ -75,12 +64,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lu0-2s-ejK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1540" y="664"/>
+            <point key="canvasLocation" x="-2081" y="663"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="2fh-i1-jLG">
             <objects>
-                <viewController storyboardIdentifier="MainVC" id="cZI-YI-Yuo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" id="cZI-YI-Yuo" customClass="MainViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="srE-0p-gnt"/>
                         <viewControllerLayoutGuide type="bottom" id="1cE-RG-pg4"/>
@@ -92,13 +81,13 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-ha-2p3">
                                 <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
                                 <connections>
-                                    <segue destination="c6c-Zr-Qbh" kind="embed" id="W1m-Er-SEx"/>
+                                    <segue destination="BYZ-38-t0r" kind="embed" id="PwG-WX-rCn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWZ-kv-qpF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                 <connections>
-                                    <segue destination="U70-7z-7IJ" kind="embed" id="Zio-ds-sro"/>
+                                    <segue destination="eaD-UN-rx2" kind="embed" id="x5v-R8-DvT"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -120,34 +109,20 @@
             </objects>
             <point key="canvasLocation" x="-712.79999999999995" y="495.20239880059972"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gex-VM-pzG">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Wi-GZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c6c-Zr-Qbh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldM-To-CXe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NPo-EY-f7p"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="212" y="682"/>
-        </scene>
         <!--Calendar View Controller-->
         <scene sceneID="cpO-AZ-VBB">
             <objects>
                 <viewController id="eaD-UN-rx2" customClass="CalendarViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8vJ-Ul-eHg"/>
+                        <viewControllerLayoutGuide type="bottom" id="gcW-Pc-Zlj"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UZm-fz-4VD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YXC-zI-xNm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="EZw-y5-NRe">
                                     <size key="itemSize" width="99" height="99"/>
@@ -156,7 +131,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="mjU-HK-cmJ" customClass="DayCollectionCell" customModule="Calendar" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayCollectionCell" id="mjU-HK-cmJ" customClass="DayCollectionCell" customModule="Calendar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="99" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -197,43 +172,14 @@
                             <constraint firstAttribute="trailing" secondItem="YXC-zI-xNm" secondAttribute="trailing" id="vFQ-Zf-GLI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hfX-jb-ckR">
-                        <barButtonItem key="leftBarButtonItem" title="delete" id="khl-rn-nNR">
-                            <connections>
-                                <action selector="deleteAction:" destination="eaD-UN-rx2" id="dFC-fK-cRV"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="add" id="6SZ-YP-ng0">
-                            <connections>
-                                <action selector="addAction:" destination="eaD-UN-rx2" id="zEy-6Y-WBM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hfX-jb-ckR"/>
                     <connections>
                         <outlet property="collectionView" destination="YXC-zI-xNm" id="G8D-Oz-G7H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ME7-79-wk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1094" y="278"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="TrS-zP-JS5">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U70-7z-7IJ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4uY-eW-c2l">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eaD-UN-rx2" kind="relationship" relationship="rootViewController" id="Y6J-Vk-s6j"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ifv-aJ-kxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="200.80000000000001" y="277.9610194902549"/>
+            <point key="canvasLocation" x="212" y="284"/>
         </scene>
     </scenes>
 </document>
