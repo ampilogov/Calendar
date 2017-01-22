@@ -62,6 +62,7 @@ class CalendarService: ICalendarService {
                     
                     let event1 = DBEvent(context: context)
                     event1.title = "1111111"
+                    event1.location = "Moscow"
                     event1.startDate = lastDate
                     let event2 = DBEvent(context: context)
                     event2.title = "222222"
