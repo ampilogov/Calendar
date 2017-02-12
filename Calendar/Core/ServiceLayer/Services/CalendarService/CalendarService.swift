@@ -50,27 +50,15 @@ class CalendarService: ICalendarService {
     
     func initializeCalendar(completion: @escaping () -> Void) {
         
-        storage.performAndSaveBackgroundTask({ (context) in
+        storage.performBackgroundTaskAndSave({ (context) in
             let lastDay = self.fetchAllDays(in: context).last
             var lastDate = lastDay?.date ?? Const.initialDate
             
-            while lastDate <= self.currentDate {
-                if let nextDate = lastDate.date(byAddingDays: 1) {
-                    let day = DBDay(context: context)
-                    day.date = lastDate
-                    lastDate = nextDate
-                    
-                    let event1 = DBEvent(context: context)
-                    event1.title = "1111111"
-                    event1.location = "Moscow"
-                    event1.startDate = lastDate
-                    let event2 = DBEvent(context: context)
-                    event2.title = "222222"
-                    event2.location = "San Francisco"
-                    event2.startDate = lastDate.date(byAddingDays: 1)!
-                    
-                    day.events = [event1, event2]
-                }
+            while lastDate <= self.currentDate.date(byAddingDays: 30) {
+                let nextDate = lastDate.date(byAddingDays: 1)
+                let day = DBDay(context: context)
+                day.date = lastDate
+                lastDate = nextDate
             }
         }) { 
             DispatchQueue.main.async {

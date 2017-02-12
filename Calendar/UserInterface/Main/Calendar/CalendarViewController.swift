@@ -56,7 +56,7 @@ class CalendarViewController:   UIViewController,
     
     func update(day: DBDay) {
         let indexPath = fetchedResultsController.indexPath(forObject: day)
-        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
     }
     
     // MARK: - User Actions

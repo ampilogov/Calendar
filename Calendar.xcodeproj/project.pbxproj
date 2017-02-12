@@ -15,6 +15,7 @@
 		001290A01E2BACC300FB296F /* DayCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0012909F1E2BACC300FB296F /* DayCollectionCell.swift */; };
 		001290A31E2D833A00FB296F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001290A21E2D833A00FB296F /* Const.swift */; };
 		003084E21E3401F600B0E92D /* DBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003084E11E3401F600B0E92D /* DBEvent.swift */; };
+		00456D8E1E4FD57A00EB749F /* EventFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00456D8D1E4FD57A00EB749F /* EventFactory.swift */; };
 		00B5CD3E1E2AD6A800FB86C9 /* DBDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E654F31E2ABC4A0085D73E /* DBDay.swift */; };
 		00E654E11E2AB9830085D73E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00E654DD1E2AB9830085D73E /* DataModel.xcdatamodeld */; };
 		00E654E21E2AB9830085D73E /* IStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E654DF1E2AB9830085D73E /* IStorage.swift */; };
@@ -63,6 +64,7 @@
 		0012909F1E2BACC300FB296F /* DayCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DayCollectionCell.swift; path = UserInterface/Main/Calendar/Cells/DayCollectionCell.swift; sourceTree = "<group>"; };
 		001290A21E2D833A00FB296F /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Const.swift; path = Core/Constants/Const.swift; sourceTree = "<group>"; };
 		003084E11E3401F600B0E92D /* DBEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBEvent.swift; sourceTree = "<group>"; };
+		00456D8D1E4FD57A00EB749F /* EventFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventFactory.swift; path = Core/Factories/EventFactory/EventFactory.swift; sourceTree = "<group>"; };
 		00E654DE1E2AB9830085D73E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		00E654DF1E2AB9830085D73E /* IStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IStorage.swift; path = Core/ServiceLayer/CoreServices/Storage/IStorage.swift; sourceTree = "<group>"; };
 		00E654E01E2AB9830085D73E /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = Core/ServiceLayer/CoreServices/Storage/Storage.swift; sourceTree = "<group>"; };
@@ -160,6 +162,22 @@
 				001290A21E2D833A00FB296F /* Const.swift */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		00456D8B1E4FD4CB00EB749F /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				00456D8C1E4FD53100EB749F /* EventFactory */,
+			);
+			name = Factories;
+			sourceTree = "<group>";
+		};
+		00456D8C1E4FD53100EB749F /* EventFactory */ = {
+			isa = PBXGroup;
+			children = (
+				00456D8D1E4FD57A00EB749F /* EventFactory.swift */,
+			);
+			name = EventFactory;
 			sourceTree = "<group>";
 		};
 		00E654F21E2ABAB40085D73E /* Models */ = {
@@ -261,6 +279,7 @@
 		312B22A81DF2ECC50071E867 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				00456D8B1E4FD4CB00EB749F /* Factories */,
 				001290A11E2D830300FB296F /* Constants */,
 				312B22F51DF481470071E867 /* ServiceLayer */,
 				312B22F01DF480CC0071E867 /* Extantions */,
@@ -514,6 +533,7 @@
 				00E654E11E2AB9830085D73E /* DataModel.xcdatamodeld in Sources */,
 				00B5CD3E1E2AD6A800FB86C9 /* DBDay.swift in Sources */,
 				312B22741DF2EB270071E867 /* AppDelegate.swift in Sources */,
+				00456D8E1E4FD57A00EB749F /* EventFactory.swift in Sources */,
 				00E654EE1E2ABA6B0085D73E /* CalendarService.swift in Sources */,
 				00E654E21E2AB9830085D73E /* IStorage.swift in Sources */,
 				00E654E31E2AB9830085D73E /* Storage.swift in Sources */,

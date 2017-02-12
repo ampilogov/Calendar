@@ -57,7 +57,7 @@ class Storage: IStorage {
         }
     }
     
-    func performAndSaveBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void, completion: @escaping () -> Swift.Void) {
+    func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: @escaping () -> Swift.Void) {
         
         DispatchQueue.global().sync {
             let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)

@@ -22,8 +22,12 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
     var calendar: IDayUpdatable?
     var agenda: IDayUpdatable?
     
+    var lastDate = Date()
     func didScrollToDay(_ day: DBDay) {
-        calendar?.update(day: day)
+        if day.date != lastDate {
+            calendar?.update(day: day)
+        }
+        lastDate = day.date
     }
     
     func didSelectDay(_ day: DBDay) {

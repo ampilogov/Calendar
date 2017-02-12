@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212" y="662.96851574212894"/>
+            <point key="canvasLocation" x="1151.2" y="662.96851574212894"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="x1a-zK-gBU">
@@ -69,7 +69,7 @@
         <!--Main View Controller-->
         <scene sceneID="2fh-i1-jLG">
             <objects>
-                <viewController storyboardIdentifier="MainVC" id="cZI-YI-Yuo" customClass="MainViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cZI-YI-Yuo" customClass="MainViewController" customModule="Calendar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="srE-0p-gnt"/>
                         <viewControllerLayoutGuide type="bottom" id="1cE-RG-pg4"/>
@@ -104,10 +104,11 @@
                             <constraint firstAttribute="trailing" secondItem="0WW-ha-2p3" secondAttribute="trailing" id="qCN-18-MHp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="prI-1z-rZh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rAi-Ft-zem" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-712.79999999999995" y="495.20239880059972"/>
+            <point key="canvasLocation" x="226.40000000000001" y="495.20239880059972"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="cpO-AZ-VBB">
@@ -179,7 +180,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ME7-79-wk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="212" y="284"/>
+            <point key="canvasLocation" x="1151.2" y="283.35832083958024"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TxC-ZY-y8p">
+            <objects>
+                <navigationController storyboardIdentifier="MainVC" automaticallyAdjustsScrollViewInsets="NO" id="4dN-Oz-CG1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qcl-Yt-FIx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cZI-YI-Yuo" kind="relationship" relationship="rootViewController" id="4yW-k4-qqh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sk-Zr-Afk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-712.79999999999995" y="495.20239880059972"/>
         </scene>
     </scenes>
 </document>

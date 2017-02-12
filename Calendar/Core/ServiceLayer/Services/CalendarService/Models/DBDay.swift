@@ -12,18 +12,17 @@ import CoreData
 @objc(DBDay)
 class DBDay: NSManagedObject {
     
+    static let entityName = "Day"
+    
     @nonobjc class func fetchRequest() -> NSFetchRequest<DBDay> {
-        return NSFetchRequest<DBDay>(entityName: "Day")
+        return NSFetchRequest<DBDay>(entityName: entityName)
     }
 
     @NSManaged var identifer: Int16
-    @NSManaged var date: Date?
+    @NSManaged var date: Date
     @NSManaged var events: Set<DBEvent>
     
     func formattedDate() -> String {
-        guard let date = date else {
-            return ""
-        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM yyyy"

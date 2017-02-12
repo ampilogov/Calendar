@@ -25,4 +25,9 @@ class Locator {
     func calendarService() -> ICalendarService {
         return CalendarService(storage: storage())
     }
+    
+    func eventFactory() -> EventFactory {
+        return EventFactory(storage: storage(), calendarService: calendarService())
+    }
+    
 }
