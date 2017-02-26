@@ -17,7 +17,8 @@ class CalendarViewController:   UIViewController,
                                 IDayUpdatable,
                                 NSFetchedResultsControllerDelegate,
                                 UICollectionViewDataSource,
-                                UICollectionViewDelegate {
+                                UICollectionViewDelegate,
+                                UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -38,6 +39,13 @@ class CalendarViewController:   UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        guard let currentDay = calendarService.fetchCurrentDay() else {
+            return
+        }
+        update(day: currentDay)
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,6 +56,7 @@ class CalendarViewController:   UIViewController,
     private func configureCollectionViewLayout() {
         itemSize = collectionView.frame.size.width / 7
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.invalidateLayout()
             layout.itemSize = CGSize(width: itemSize, height: itemSize)
         }
     }
@@ -56,17 +65,17 @@ class CalendarViewController:   UIViewController,
     
     func update(day: DBDay) {
         let indexPath = fetchedResultsController.indexPath(forObject: day)
-        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
-    }
-    
-    // MARK: - User Actions
-    
-    @IBAction func addAction(_ sender: UIBarButtonItem) {
-        calendarService.addDaysAfter()
-    }
-    
-    @IBAction func deleteAction(_ sender: UIBarButtonItem) {
-        calendarService.deleteAll()
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
+
+        if let indexPath = indexPath {
+            let item = collectionView(collectionView, cellForItemAt: indexPath)
+            let offset = CGPoint(x: 0, y: item.frame.origin.y - collectionView.contentInset.top)
+            if ceil(collectionView.contentOffset.y) != ceil(offset.y) {
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.collectionView.contentOffset = offset
+                }, completion: nil)
+            }
+        }
     }
     
     // MARK: - UICollectionViewDataSource
@@ -79,7 +88,9 @@ class CalendarViewController:   UIViewController,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.className, for: indexPath)
         if let day = fetchedResultsController.fetchedObjects?[indexPath.row],
             let cell = cell as? DayCollectionCell {
-            cell.titleLabel.text = day.formattedDate()
+            let viewModel = CalendarDayViewModel(date: day.date)
+            cell.titleLabel.text = viewModel.formattedDate
+            cell.containerView.backgroundColor = viewModel.backgroundColor
         }
         
         return cell

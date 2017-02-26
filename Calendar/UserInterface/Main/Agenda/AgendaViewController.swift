@@ -134,6 +134,10 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
 
     // MARK: - UIScrollViewDelegate
     
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        delegate?.agendaDidEndScrolling()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         addDaysIfNeeded(in: scrollView)
         handleDayChange()

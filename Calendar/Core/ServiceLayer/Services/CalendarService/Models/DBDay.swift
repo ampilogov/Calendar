@@ -29,4 +29,5 @@ class DBDay: NSManagedObject {
         
         return dateFormatter.string(from: date)
     }
+    
 }

@@ -12,6 +12,6 @@ protocol IAgendaModule {
     func update(day: DBDay)
 }
 
-protocol IDayUpdatable {
+protocol IDayUpdatable: class {
     func update(day: DBDay)
 }

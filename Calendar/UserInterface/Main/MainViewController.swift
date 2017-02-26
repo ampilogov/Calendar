@@ -8,12 +8,41 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, IDayUpdatable {
+    
+    @IBOutlet weak var weekDaysStackView: UIStackView!
     
     let synchronizer = CalendarSynchronizer()
     
     var agendaViewController: AgendaViewController?
     var calendarViewController: CalendarViewController?
+    
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        return dateFormatter
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+        setupWeekDaysView()
+    }
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    func setupWeekDaysView() {
+        for daySymbol in Calendar.current.veryShortWeekdaySymbols {
+            let dayLabel = UILabel()
+            dayLabel.text = daySymbol
+            dayLabel.textAlignment = .center
+            dayLabel.font = UIFont.systemFont(ofSize: 13.0)
+            weekDaysStackView.addArrangedSubview(dayLabel)
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -28,7 +57,15 @@ class MainViewController: UIViewController {
             calendarViewController?.delegate = synchronizer
         }
         
-        synchronizer.agenda = agendaViewController
-        synchronizer.calendar = calendarViewController
+        synchronizer.agendaViewController = agendaViewController
+        synchronizer.calendarViewController = calendarViewController
+        synchronizer.mainViewController = self
     }
+    
+    // MARK: - IDayUpdatable
+    
+    func update(day: DBDay) {
+        self.navigationItem.title = dateFormatter.string(from: day.date)
+    }
+    
 }

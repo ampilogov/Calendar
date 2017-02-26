@@ -10,6 +10,15 @@ import UIKit
 
 class DayCollectionCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var selectingView: UIView!
+    @IBOutlet weak var containerView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+       
+        selectingView.backgroundColor = .flatBlue
+        titleLabel.textColor = .gray
+    }
     
     override var isSelected: Bool {
         get {
@@ -18,9 +27,11 @@ class DayCollectionCell: UICollectionViewCell {
         set {
             super.isSelected = newValue
             if newValue {
-                backgroundColor = .red
+                selectingView.isHidden = false
+                titleLabel.textColor = .white
             } else {
-                backgroundColor = .green
+                selectingView.isHidden = true
+                titleLabel.textColor = .gray
             }
         }
     }
@@ -32,9 +43,11 @@ class DayCollectionCell: UICollectionViewCell {
         set {
             super.isHighlighted = newValue
             if newValue {
-                backgroundColor = .orange
+                selectingView.isHidden = false
+                titleLabel.textColor = .white
             } else {
-                backgroundColor = .green
+                selectingView.isHidden = true
+                titleLabel.textColor = .gray
             }
         }
     }

@@ -14,23 +14,37 @@ protocol CalendarViewControllerDelegate: class {
 
 protocol AgendaViewControllerDelegate: class {
     func didScrollToDay(_ day: DBDay)
+    func agendaDidEndScrolling()
 }
 
 class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewControllerDelegate {
+
+    private enum State {
+        case synchronized
+        case scrolling
+    }
     
-    // TODO: move to init
-    var calendar: IDayUpdatable?
-    var agenda: IDayUpdatable?
+    private var state = State.synchronized
     
-    var lastDate = Date()
+    weak var calendarViewController: IDayUpdatable?
+    weak var agendaViewController: IDayUpdatable?
+    weak var mainViewController: IDayUpdatable?
+    
     func didScrollToDay(_ day: DBDay) {
-        if day.date != lastDate {
-            calendar?.update(day: day)
+        // update calendar if agenda finished synchronization
+        if state == .synchronized {
+            mainViewController?.update(day: day)
+            calendarViewController?.update(day: day)
         }
-        lastDate = day.date
+    }
+    
+    func agendaDidEndScrolling() {
+        state = .synchronized
     }
     
     func didSelectDay(_ day: DBDay) {
-        agenda?.update(day: day)
+        state = .scrolling
+        mainViewController?.update(day: day)
+        agendaViewController?.update(day: day)
     }
 }
