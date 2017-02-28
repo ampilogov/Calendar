@@ -22,9 +22,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="291.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-91-QDC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-91-QDC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="291.5"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="SrS-Ka-WVW"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="oLZ-1N-Cka"/>
@@ -59,7 +59,17 @@
                     <view key="view" contentMode="scaleToFill" id="L7P-OZ-Rq7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.52930655189999998" green="0.48577278800000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="290-z4-yWb">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.52930655189999998" green="0.48577278800000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="290-z4-yWb" firstAttribute="centerY" secondItem="L7P-OZ-Rq7" secondAttribute="centerY" id="4Of-BI-NwC"/>
+                            <constraint firstItem="290-z4-yWb" firstAttribute="centerX" secondItem="L7P-OZ-Rq7" secondAttribute="centerX" id="mV1-4Q-5cV"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lu0-2s-ejK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,6 +148,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="calendarHeightConstraint" destination="bAD-Uo-PZ1" id="6tP-DJ-SQQ"/>
                         <outlet property="weekDaysStackView" destination="cMi-Y7-viy" id="Pkr-at-fgJ"/>
                     </connections>
                 </viewController>

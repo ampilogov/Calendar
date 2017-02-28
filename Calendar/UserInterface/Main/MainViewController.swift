@@ -8,9 +8,15 @@
 
 import UIKit
 
-class MainViewController: UIViewController, IDayUpdatable {
+protocol IScrollHandler: class {
+    func didBeginScrollCalendar()
+    func didBeginScrollAgenda()
+}
+
+class MainViewController: UIViewController, IDayUpdatable, IScrollHandler {
     
     @IBOutlet weak var weekDaysStackView: UIStackView!
+    @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     
     let synchronizer = CalendarSynchronizer()
     
@@ -66,6 +72,22 @@ class MainViewController: UIViewController, IDayUpdatable {
     
     func update(day: DBDay) {
         self.navigationItem.title = dateFormatter.string(from: day.date)
+    }
+    
+    // MARK: - IScrollHandler
+    
+    func didBeginScrollCalendar() {
+        calendarHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func didBeginScrollAgenda() {
+        calendarHeightConstraint.constant = 300
+        UIView.animate(withDuration: 0.3) { 
+            self.view.layoutIfNeeded()
+        }
     }
     
 }

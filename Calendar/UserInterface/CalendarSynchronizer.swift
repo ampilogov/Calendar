@@ -10,10 +10,12 @@ import Foundation
 
 protocol CalendarViewControllerDelegate: class {
     func didSelectDay(_ day: DBDay)
+    func calendarDidBeginScrolling()
 }
 
 protocol AgendaViewControllerDelegate: class {
     func didScrollToDay(_ day: DBDay)
+    func agendaDidBeginScrolling()
     func agendaDidEndScrolling()
 }
 
@@ -28,7 +30,7 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
     
     weak var calendarViewController: IDayUpdatable?
     weak var agendaViewController: IDayUpdatable?
-    weak var mainViewController: IDayUpdatable?
+    weak var mainViewController: (IDayUpdatable & IScrollHandler)?
     
     func didScrollToDay(_ day: DBDay) {
         // update calendar if agenda finished synchronization
@@ -42,9 +44,17 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
         state = .synchronized
     }
     
+    func agendaDidBeginScrolling() {
+        mainViewController?.didBeginScrollAgenda()
+    }
+    
     func didSelectDay(_ day: DBDay) {
         state = .scrolling
         mainViewController?.update(day: day)
         agendaViewController?.update(day: day)
+    }
+    
+    func calendarDidBeginScrolling() {
+        mainViewController?.didBeginScrollCalendar()
     }
 }

@@ -28,22 +28,36 @@ class EventFactory {
             
             for (index, events) in self.eventsDataSource.enumerated() {
                 
-                // Create events for Storage
+                // Get day for adding events
+                let date = currentDay.date.date(byAddingDays: index)
+                let request: NSFetchRequest<DBDay> = DBDay.fetchRequest()
+                request.predicate = NSPredicate(format: "date == %@", argumentArray: [date])
+                guard let day = try? context.fetch(request).first else {
+                    continue
+                }
+                
+                // Create events
                 var dbEvents = Set<DBEvent>()
                 for event in events {
                     let dbEvent = DBEvent(context: context)
                     dbEvent.title = event["title"] ?? "No Title"
-                    dbEvent.location = event["location"] ?? "No Location"
+                    dbEvent.location = event["location"]
+                    
+                    if let duration = event["duration"] {
+                        dbEvent.duration = TimeInterval(duration) ?? 0
+                    }
+                    
+                    if let startTime = event["startTime"],
+                        let day = day {
+                        let startTimeInterval = TimeInterval(startTime) ?? 0
+                        dbEvent.startDate = day.date.addingTimeInterval(startTimeInterval)
+                    }
                     
                     dbEvents.insert(dbEvent)
                 }
                 
                 // Add events to day
-                let date = currentDay.date.date(byAddingDays: index)
-                let request: NSFetchRequest<DBDay> = DBDay.fetchRequest()
-                request.predicate = NSPredicate(format: "date == %@", argumentArray: [date])
-                let day = try? context.fetch(request).first
-                day??.events = dbEvents
+                day?.events = dbEvents
             }
         })
         
@@ -52,7 +66,9 @@ class EventFactory {
     var eventsDataSource = [
         
         [["title": "Meeting",
-         "location": "Moscow"],
+         "location": "Moscow",
+         "duration": "10800",
+         "startTime": "324000"],
          ["title": "Hiking",
           "location": "Everest"]],
       

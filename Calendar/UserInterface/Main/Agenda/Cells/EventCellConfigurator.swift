@@ -12,6 +12,11 @@ class EventCellConfigurator {
 
     func configure(_ eventCell: EventCell, with event: DBEvent) {
 
-        eventCell.configure(title: event.title, location: event.location, startTime: "startTime", duration: String(event.timeinterval))
+        let duration = String(event.duration / 60 / 60) + " h"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        let startTime = dateFormatter.string(from: event.startDate)
+        
+        eventCell.configure(title: event.title, location: event.location, startTime: startTime, duration: duration)
     }
 }

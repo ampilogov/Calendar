@@ -18,7 +18,7 @@ class DBEvent: NSManagedObject {
     @NSManaged public var title: String
     @NSManaged public var location: String?
     @NSManaged public var startDate: Date
-    @NSManaged public var timeinterval: TimeInterval
+    @NSManaged public var duration: TimeInterval
     
     @NSManaged public var day: DBDay?
     

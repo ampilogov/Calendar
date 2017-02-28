@@ -119,6 +119,10 @@ class CalendarViewController:   UIViewController,
     
     // MARK: - UIScrollViewDelegate
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.calendarDidBeginScrolling()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let minButtomOffset = scrollView.contentOffset.y + self.view.frame.size.height + Config.minOffset
         if  scrollView.contentSize.height <= minButtomOffset {

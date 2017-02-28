@@ -104,12 +104,12 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     // MARK: - UITableViewDelegate
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.font = UIFont.systemFont(ofSize: 15)
+            header.textLabel?.textColor = .gray
+            header.backgroundView?.backgroundColor = .flatGray
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -133,6 +133,10 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     }
 
     // MARK: - UIScrollViewDelegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.agendaDidBeginScrolling()
+    }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         delegate?.agendaDidEndScrolling()
