@@ -37,8 +37,13 @@ class Storage: IStorage {
         // Create PersistentStore
         let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
         let storeURL = docURL?.appendingPathComponent("DataModel.sqlite")
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption : Int(true),
+            NSInferMappingModelAutomaticallyOption : Int(true)
+        ]
+        
         do {
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
         } catch {
             fatalError("Error migrating store: \(error)")
         }
