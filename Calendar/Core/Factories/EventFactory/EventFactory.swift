@@ -39,7 +39,10 @@ class EventFactory {
                 // Create events
                 var dbEvents = Set<DBEvent>()
                 for event in events {
-                    let dbEvent = DBEvent(context: context)
+                    guard let dbEvent = NSEntityDescription.insertNewObject(forEntityName: DBEvent.entityName, into: context) as? DBEvent else {
+                        continue
+                    }
+                    
                     dbEvent.title = event["title"] ?? "No Title"
                     dbEvent.location = event["location"]
                     

@@ -56,8 +56,8 @@ class CalendarService: ICalendarService {
             
             while lastDate <= self.currentDate.date(byAddingDays: 30) {
                 let nextDate = lastDate.date(byAddingDays: 1)
-                let day = DBDay(context: context)
-                day.date = lastDate
+                let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
+                day?.date = lastDate
                 lastDate = nextDate
             }
         }) { 
@@ -87,8 +87,8 @@ class CalendarService: ICalendarService {
             let firstDay = self.fetchAllDays(in: context).first // TODO: impoove
             let firstDate = firstDay?.date ?? self.currentDate
             for i in 1...Const.batchSize {
-                let day = DBDay(context: context)
-                day.date = firstDate.date(byAddingDays: -i)
+                let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
+                day?.date = firstDate.date(byAddingDays: -i)
             }
         }
     }
@@ -98,15 +98,14 @@ class CalendarService: ICalendarService {
             let lastDay = self.fetchAllDays(in: context).last // TODO: impoove
             let lastDate = lastDay?.date ?? self.currentDate
             for i in 0..<Const.batchSize {
-                let day = DBDay(context: context)
-                day.date = lastDate.date(byAddingDays: i)
+                let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
+                day?.date = lastDate.date(byAddingDays: i)
             }
         }
     }
     
     func deleteAll() {
-        guard let entityName = DBDay.entity().name else { return }
-        storage.cleanEntity(entityName: entityName)
+        storage.cleanEntity(entityName: DBDay.entityName)
     }
     
     // MARK: - Helpers
