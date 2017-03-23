@@ -15,7 +15,7 @@ class CalendarService: ICalendarService {
     private var storage: IStorage
     
     var currentDate: Date {
-        return Calendar.GMT.startOfDay(for: Date())
+        return Calendar.current.startOfDay(for: Date())
     }
     
     init(storage: IStorage) {
@@ -52,9 +52,13 @@ class CalendarService: ICalendarService {
         
         storage.performBackgroundTaskAndSave({ (context) in
             let lastDay = self.fetchAllDays(in: context).last
-            var lastDate = lastDay?.date ?? Const.initialDate
             
-            while lastDate <= self.currentDate.date(byAddingDays: 30) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            
+            var lastDate = lastDay?.date ?? dateFormatter.date(from: "01.01.2012") ?? Date()
+            
+            while lastDate <= self.currentDate.date(byAddingDays: 60) {
                 let nextDate = lastDate.date(byAddingDays: 1)
                 let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
                 day?.date = lastDate
@@ -82,26 +86,15 @@ class CalendarService: ICalendarService {
         return result.first
     }
     
-    func addDaysBefore() {
-        storage.performBackgroundTask { (context) in
-            let firstDay = self.fetchAllDays(in: context).first // TODO: impoove
-            let firstDate = firstDay?.date ?? self.currentDate
-            for i in 1...Const.batchSize {
-                let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
-                day?.date = firstDate.date(byAddingDays: -i)
-            }
-        }
-    }
-    
     func addDaysAfter() {
-        storage.performBackgroundTask { (context) in
-            let lastDay = self.fetchAllDays(in: context).last // TODO: impoove
+        storage.performBackgroundTaskAndSave({ (context) in
+            let lastDay = self.fetchAllDays(in: context).last
             let lastDate = lastDay?.date ?? self.currentDate
             for i in 0..<Const.batchSize {
                 let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
                 day?.date = lastDate.date(byAddingDays: i)
             }
-        }
+        }, completion: nil)
     }
     
     func deleteAll() {

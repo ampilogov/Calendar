@@ -11,6 +11,7 @@ import Foundation
 protocol CalendarViewControllerDelegate: class {
     func didSelectDay(_ day: DBDay)
     func calendarDidBeginScrolling()
+    func calendarDidEndScrolling()
 }
 
 protocol AgendaViewControllerDelegate: class {
@@ -26,17 +27,34 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
         case scrolling
     }
     
+    let calendarService = Locator.shared.calendarService()
     private var state = State.synchronized
     
-    weak var calendarViewController: IDayUpdatable?
-    weak var agendaViewController: IDayUpdatable?
-    weak var mainViewController: (IDayUpdatable & IScrollHandler)?
+    unowned var calendarViewController: IDayUpdatable
+    unowned var agendaViewController: IDayUpdatable
+    unowned var mainViewController: (IDayUpdatable & SizeDelegate)
+    
+    required init(calendarViewController: IDayUpdatable,
+                  agendaViewController: IDayUpdatable,
+                  mainViewController: (IDayUpdatable & SizeDelegate)) {
+        
+        self.calendarViewController = calendarViewController
+        self.agendaViewController = agendaViewController
+        self.mainViewController = mainViewController
+        
+        // Initial day is curent day in calendar and agenda
+        if let currentDay = calendarService.fetchCurrentDay() {
+            calendarViewController.update(day: currentDay, animated: false)
+            agendaViewController.update(day: currentDay, animated: false)
+            mainViewController.update(day: currentDay, animated: false)
+        }
+    }
     
     func didScrollToDay(_ day: DBDay) {
         // update calendar if agenda finished synchronization
         if state == .synchronized {
-            mainViewController?.update(day: day)
-            calendarViewController?.update(day: day)
+            mainViewController.update(day: day, animated: true)
+            calendarViewController.update(day: day, animated: true)
         }
     }
     
@@ -45,16 +63,21 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
     }
     
     func agendaDidBeginScrolling() {
-        mainViewController?.didBeginScrollAgenda()
+        mainViewController.didBeginScrollAgenda()
     }
     
     func didSelectDay(_ day: DBDay) {
         state = .scrolling
-        mainViewController?.update(day: day)
-        agendaViewController?.update(day: day)
+        mainViewController.update(day: day, animated: true)
+        agendaViewController.update(day: day, animated: true)
     }
     
     func calendarDidBeginScrolling() {
-        mainViewController?.didBeginScrollCalendar()
+        state = .scrolling
+        mainViewController.didBeginScrollCalendar()
+    }
+    
+    func calendarDidEndScrolling() {
+        state = .synchronized
     }
 }

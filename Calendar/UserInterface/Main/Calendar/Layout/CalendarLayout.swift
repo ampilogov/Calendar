@@ -32,11 +32,16 @@ class CalendarLayout: UICollectionViewFlowLayout {
         let rowHeight = collectionViewContentSize.width / CGFloat(Calendar.current.daysInWeek)
         
         // Create Rects for separator decoration views every row (daysInWeek)
-        for i in 0..<numberOfItems {
-            if i % daysInWeek == 0 {
-                let indexPath = IndexPath(item: i, section: 0)
-                let yPosition = CGFloat(i / daysInWeek) * rowHeight
-                separatorViewsRects[indexPath] = CGRect(x: 0, y: yPosition, width: collectionViewContentSize.width, height: separatorHeight)
+        DispatchQueue.global(qos: .userInteractive).async {
+            for i in 0..<numberOfItems {
+                if i % self.daysInWeek == 0 {
+                    let indexPath = IndexPath(item: i, section: 0)
+                    let yPosition = CGFloat(i / self.daysInWeek) * rowHeight
+                    self.separatorViewsRects[indexPath] = CGRect(x: 0,
+                                                                 y: yPosition,
+                                                                 width: self.collectionViewContentSize.width,
+                                                                 height: self.separatorHeight)
+                }
             }
         }
     }

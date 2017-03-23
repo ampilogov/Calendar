@@ -34,39 +34,16 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCells()
-        setupScrollPosition()
-    }
 
-    func registerCells() {
-        let eventCellNib = UINib(nibName: EventCell.className, bundle: Bundle.main)
-        tableView.register(eventCellNib, forCellReuseIdentifier: EventCell.className)
-    }
-    
-    func setupScrollPosition() {
-        guard let currentDay = calendarService.fetchCurrentDay() else {
-            return
-        }
-        update(day: currentDay)
     }
     
     // MARK: - IDayUpdatable Prorocol
     
-    func update(day: DBDay) {
+    func update(day: DBDay, animated: Bool) {
         guard let indexPath = fetchedResultsController.indexPath(forObject: day) else {
             return
         }
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    }
-
-    // MARK: - User Actions
-    
-    @IBAction func addAction(_ sender: UIBarButtonItem) {
-        calendarService.addDaysAfter()
-    }
-
-    @IBAction func deleteAction(_ sender: UIBarButtonItem) {
-        calendarService.deleteAll()
+        tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
     }
 
     // MARK: - UITableViewDataSource
@@ -139,6 +116,10 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        delegate?.agendaDidEndScrolling()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.agendaDidEndScrolling()
     }
     

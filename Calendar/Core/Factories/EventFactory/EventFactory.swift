@@ -12,10 +12,14 @@ class EventFactory {
     
     let storage: IStorage
     let calendarService: ICalendarService
+    let generator: IStaticDataGenerator
     
-    init(storage: IStorage, calendarService: ICalendarService) {
+    let daysWithEvents = 20
+    
+    init(storage: IStorage, calendarService: ICalendarService, dataGenerator: IStaticDataGenerator) {
         self.storage = storage
         self.calendarService = calendarService
+        self.generator = dataGenerator
     }
     
     func createStaticEvents() {
@@ -24,45 +28,38 @@ class EventFactory {
             return
         }
         
-        storage.performBackgroundTask({ (context) in
+        storage.performBackgroundTaskAndSave({ (context) in
             
-            for (index, events) in self.eventsDataSource.enumerated() {
+            for index in 0...self.daysWithEvents {
                 
                 // Get day for adding events
                 let date = currentDay.date.date(byAddingDays: index)
                 let request: NSFetchRequest<DBDay> = DBDay.fetchRequest()
                 request.predicate = NSPredicate(format: "date == %@", argumentArray: [date])
-                guard let day = try? context.fetch(request).first else {
+                guard let day = try? context.fetch(request).first,
+                    let dayDate = day?.date else {
                     continue
                 }
                 
                 // Create events
                 var dbEvents = Set<DBEvent>()
-                for event in events {
+                let eventsInfo = self.generator.generateEvents(for: dayDate)
+                for eventInfo in eventsInfo {
                     guard let dbEvent = NSEntityDescription.insertNewObject(forEntityName: DBEvent.entityName, into: context) as? DBEvent else {
                         continue
                     }
                     
-                    dbEvent.title = event["title"] ?? "No Title"
-                    dbEvent.location = event["location"]
-                    
-                    if let duration = event["duration"] {
-                        dbEvent.duration = TimeInterval(duration) ?? 0
-                    }
-                    
-                    if let startTime = event["startTime"],
-                        let day = day {
-                        let startTimeInterval = TimeInterval(startTime) ?? 0
-                        dbEvent.startDate = day.date.addingTimeInterval(startTimeInterval)
-                    }
-                    
+                    dbEvent.title = eventInfo.title
+                    dbEvent.location = eventInfo.location
+                    dbEvent.duration = eventInfo.duration
+                    dbEvent.startDate = eventInfo.startDate
                     dbEvents.insert(dbEvent)
                 }
                 
                 // Add events to day
                 day?.events = dbEvents
             }
-        })
+        }, completion: nil)
         
     }
     

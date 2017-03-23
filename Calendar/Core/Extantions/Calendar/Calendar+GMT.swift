@@ -11,7 +11,7 @@ import Foundation
 extension Calendar {
 
     /// return Calendar with GMT Timezone
-    static var GMT: Calendar {
+    static var GMT0: Calendar {
         var calender = Calendar(identifier: .gregorian)
         calender.timeZone = TimeZone(secondsFromGMT: 0) ?? TimeZone.current
 

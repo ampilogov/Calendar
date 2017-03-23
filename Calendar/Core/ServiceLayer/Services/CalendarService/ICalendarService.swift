@@ -21,9 +21,6 @@ protocol ICalendarService {
     /// Get current day
     func fetchCurrentDay() -> DBDay?
     
-    /// Add days before first day in calendar
-    func addDaysBefore()
-    
     /// Add days after last day in calendar
     func addDaysAfter()
     

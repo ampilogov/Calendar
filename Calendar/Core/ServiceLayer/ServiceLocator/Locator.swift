@@ -27,7 +27,8 @@ class Locator {
     }
     
     func eventFactory() -> EventFactory {
-        return EventFactory(storage: storage(), calendarService: calendarService())
+        let generator = StaticDataGenerator()
+        return EventFactory(storage: storage(), calendarService: calendarService(), dataGenerator: generator)
     }
     
 }

@@ -8,20 +8,17 @@
 
 import UIKit
 
-protocol IScrollHandler: class {
+protocol SizeDelegate: class {
     func didBeginScrollCalendar()
     func didBeginScrollAgenda()
 }
 
-class MainViewController: UIViewController, IDayUpdatable, IScrollHandler {
+class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     @IBOutlet weak var weekDaysStackView: UIStackView!
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     
-    let synchronizer = CalendarSynchronizer()
-    
-    var agendaViewController: AgendaViewController?
-    var calendarViewController: CalendarViewController?
+    var calendarSynchronizer: CalendarSynchronizer?
     
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -50,27 +47,30 @@ class MainViewController: UIViewController, IDayUpdatable, IScrollHandler {
         }
     }
     
+    func createSynchronizer() -> CalendarSynchronizer? {
+        
+        var synchronizer: CalendarSynchronizer?
+        if let agendaVC = childViewController(forClass: AgendaViewController.self),
+            let calendarVC = childViewController(forClass: CalendarViewController.self) {
+
+            synchronizer = CalendarSynchronizer(calendarViewController: calendarVC,
+                                                agendaViewController: agendaVC,
+                                                mainViewController: self)
+            calendarVC.delegate = synchronizer
+            agendaVC.delegate = synchronizer
+        }
+        
+        return synchronizer
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let agendaVC = childViewControllers.filter({$0 is AgendaViewController}).first {
-            agendaViewController = agendaVC as? AgendaViewController
-            agendaViewController?.delegate = synchronizer
-        }
-        
-        if let calendarVC = childViewControllers.filter({$0 is CalendarViewController}).first {
-            calendarViewController = calendarVC as? CalendarViewController
-            calendarViewController?.delegate = synchronizer
-        }
-        
-        synchronizer.agendaViewController = agendaViewController
-        synchronizer.calendarViewController = calendarViewController
-        synchronizer.mainViewController = self
+        self.calendarSynchronizer = createSynchronizer()
     }
     
     // MARK: - IDayUpdatable
     
-    func update(day: DBDay) {
+    func update(day: DBDay, animated: Bool) {
         self.navigationItem.title = dateFormatter.string(from: day.date)
     }
     

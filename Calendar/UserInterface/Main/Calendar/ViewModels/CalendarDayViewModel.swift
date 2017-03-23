@@ -13,7 +13,7 @@ struct CalendarDayViewModel {
     let date: Date
     
     var formattedDate: String {
-        let day: Int = Calendar.GMT.component(.day, from: date)
+        let day: Int = Calendar.current.component(.day, from: date)
         let dateFormatter = DateFormatter()
         // Special format for first day in month
         if day == 1 {
@@ -26,7 +26,7 @@ struct CalendarDayViewModel {
     }
     
     var backgroundColor: UIColor {
-        let month: Int = Calendar.GMT.component(.month, from: date)
+        let month: Int = Calendar.current.component(.month, from: date)
         // Diferent color for next month
         let color: UIColor = month % 2 == 0 ? .flatGray : .white
         return color

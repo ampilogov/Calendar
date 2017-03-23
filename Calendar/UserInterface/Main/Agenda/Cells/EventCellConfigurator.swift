@@ -14,7 +14,7 @@ class EventCellConfigurator {
 
         let duration = String(event.duration / 60 / 60) + " h"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateFormat = "hh:mm a"
         let startTime = dateFormatter.string(from: event.startDate)
         
         eventCell.configure(title: event.title, location: event.location, startTime: startTime, duration: duration)

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 private struct Config {
-    static let minOffset: CGFloat = 100.0
+    static let minOffset: CGFloat = 500.0
 }
 
 class CalendarViewController:   UIViewController,
@@ -40,12 +40,6 @@ class CalendarViewController:   UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        guard let currentDay = calendarService.fetchCurrentDay() else {
-            return
-        }
-        update(day: currentDay)
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,17 +57,21 @@ class CalendarViewController:   UIViewController,
     
     // MARK: - IDayUpdatable
     
-    func update(day: DBDay) {
+    func update(day: DBDay, animated: Bool) {
         let indexPath = fetchedResultsController.indexPath(forObject: day)
         collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
-
+        
         if let indexPath = indexPath {
             let item = collectionView(collectionView, cellForItemAt: indexPath)
-            let offset = CGPoint(x: 0, y: item.frame.origin.y - collectionView.contentInset.top)
+            let offset = CGPoint(x: 0, y: item.frame.origin.y)
             if ceil(collectionView.contentOffset.y) != ceil(offset.y) {
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-                    self.collectionView.contentOffset = offset
-                }, completion: nil)
+                if animated {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.collectionView.contentOffset = offset
+                    })
+                } else {
+                    collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                }
             }
         }
     }
@@ -121,6 +119,10 @@ class CalendarViewController:   UIViewController,
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         delegate?.calendarDidBeginScrolling()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        delegate?.calendarDidEndScrolling()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

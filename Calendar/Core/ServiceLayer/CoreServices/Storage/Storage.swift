@@ -13,6 +13,7 @@ import CoreData
 
 class Storage: IStorage {
 
+    let saveQueue = DispatchQueue(label: "StorageQueue")
     private(set) var readContext: NSManagedObjectContext
     
     init() {
@@ -38,8 +39,8 @@ class Storage: IStorage {
         let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
         let storeURL = docURL?.appendingPathComponent("DataModel.sqlite")
         let options = [
-            NSMigratePersistentStoresAutomaticallyOption : Int(true),
-            NSInferMappingModelAutomaticallyOption : Int(true)
+            NSMigratePersistentStoresAutomaticallyOption: Int(true),
+            NSInferMappingModelAutomaticallyOption: Int(true)
         ]
         
         do {
@@ -51,32 +52,23 @@ class Storage: IStorage {
     
     // MARK: - IStorage Protocol
     
-    /// Perform background task in storage with automatic sync save
-    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Swift.Void) {
-
-        DispatchQueue.global().sync {
-            let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            context.parent = self.readContext
-            block(context)
-            self.saveChanges(context)
-        }
-    }
+    /// Perform background task in storage with automatic save
     
-    func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: @escaping () -> Swift.Void) {
+    func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: (() -> Swift.Void)?) {
         
-        DispatchQueue.global().sync {
+        saveQueue.async {
             let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
             context.parent = self.readContext
             block(context)
             self.saveChanges(context)
-            completion()
+            completion?()
         }
     }
     
     /// Delete all objects from Entity
     func cleanEntity(entityName: String) {
         
-        performBackgroundTask { (context) in
+        performBackgroundTaskAndSave({ (context) in
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
             
             do {
@@ -89,7 +81,7 @@ class Storage: IStorage {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-        }
+    }, completion: nil)
     }
 
     // MARK: - Core Data Saving support

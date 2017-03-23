@@ -19,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        Locator.shared.storage().cleanEntity(entityName: DBDay.entityName)
+        calendarService.deleteAll()
         
         calendarService.initializeCalendar {
+            self.eventFactory.createStaticEvents()
             let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
             let vc = sb.instantiateViewController(withIdentifier: "MainVC")
             self.window?.rootViewController  = vc
-            self.eventFactory.createStaticEvents()
         }
         
         return true
