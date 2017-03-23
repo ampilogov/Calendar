@@ -6,12 +6,12 @@
 //  Copyright © 2017 v.ampilogov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class SizeManager {
     
-    lazy var dayWidth: Double = {
-        return 7.0
-    }()
+    static func dayItemHeight(viewWidth: CGFloat) -> CGFloat {
+        return viewWidth / CGFloat(Calendar.current.daysInWeek)
+    }
     
 }

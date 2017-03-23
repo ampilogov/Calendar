@@ -20,6 +20,10 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     var calendarSynchronizer: CalendarSynchronizer?
     
+    lazy var calendarCollapsedHeight: CGFloat = {
+        return self.view.frame.size.height / 2 + SizeManager.dayItemHeight(viewWidth: self.view.frame.size.width) * 2 - 75
+    }()
+    
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
@@ -30,6 +34,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         super.viewDidLoad()
         setupNavigationBar()
         setupWeekDaysView()
+        calendarHeightConstraint.constant = calendarCollapsedHeight
     }
     
     func setupNavigationBar() {
@@ -77,14 +82,14 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     // MARK: - IScrollHandler
     
     func didBeginScrollCalendar() {
-        calendarHeightConstraint.constant = 0
+        calendarHeightConstraint.constant = 64
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
     func didBeginScrollAgenda() {
-        calendarHeightConstraint.constant = 300
+        calendarHeightConstraint.constant = calendarCollapsedHeight
         UIView.animate(withDuration: 0.3) { 
             self.view.layoutIfNeeded()
         }

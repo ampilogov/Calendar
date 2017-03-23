@@ -29,7 +29,7 @@ class CalendarLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         let numberOfItems = collectionView?.numberOfItems(inSection: 0) ?? 0
-        let rowHeight = collectionViewContentSize.width / CGFloat(Calendar.current.daysInWeek)
+        let rowHeight = SizeManager.dayItemHeight(viewWidth: collectionViewContentSize.width)
         
         // Create Rects for separator decoration views every row (daysInWeek)
         DispatchQueue.global(qos: .userInteractive).async {
