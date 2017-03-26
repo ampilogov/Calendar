@@ -22,7 +22,7 @@ protocol IStorage: class {
     func isEntityEmpty(entityName: String) -> Bool
     
     /// Delete all objects from entity
-    func cleanEntity(entityName: String)
+    func cleanEntity(entityName: String, completion: (() -> Swift.Void)?)
 }
 
 class Storage: IStorage {
@@ -63,7 +63,7 @@ class Storage: IStorage {
         } catch {
             fatalError("Error migrating store: \(error)")
         }
-}
+    }
     
     // MARK: - IStorage Protocol
     
@@ -118,7 +118,7 @@ class Storage: IStorage {
         return count == 0
     }
     
-    func cleanEntity(entityName: String) {
+    func cleanEntity(entityName: String, completion: (() -> Swift.Void)?) {
         
         performBackgroundTaskAndSave({ (context) in
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
@@ -133,7 +133,9 @@ class Storage: IStorage {
                 let nserror = error as NSError
                 fatalError("Cant't clean entity. Error: \(nserror), \(nserror.userInfo)")
             }
-        }, completion: nil)
+        }, completion: {
+            completion?()
+        })
     }
 
     // MARK: - Core Data Saving support
@@ -143,9 +145,8 @@ class Storage: IStorage {
         var contextToSave: NSManagedObjectContext? = context
         
         while contextToSave != nil {
-            
-            let hasChanges = contextToSave?.hasChanges ?? false
-            if hasChanges {
+
+            if contextToSave?.hasChanges == true {
                 contextToSave?.performAndWait {
                     do {
                         try contextToSave?.save()
