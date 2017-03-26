@@ -9,12 +9,7 @@
 import UIKit
 import CoreData
 
-private struct Config {
-    static let minOffset: CGFloat = 100.0
-    static let rowHeight: CGFloat = 44.0
-}
-
-class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,12 +24,6 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     required init?(coder aDecoder: NSCoder) {
         fetchedResultsController = calendarService.createFetchedResultsController(sectionName: "date")
         super.init(coder: aDecoder)
-        fetchedResultsController.delegate = self
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
     }
     
     // MARK: - IDayUpdatable Prorocol
@@ -71,15 +60,18 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
             
             cellConfigurator.configure(eventCell, with: event)
             cell = eventCell
-            
         } else {
-            cell.textLabel?.text = "NO Events"
+            cellConfigurator.configure(emptyCell: cell)
         }
         
         return cell
     }
     
     // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
@@ -92,21 +84,6 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let day = self.day(at: section)
         return day.formattedDate()
-    }
-    
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        self.tableView?.reloadData()
-        self.navigationItem.title = "\(controller.fetchedObjects?.count)"
     }
 
     // MARK: - UIScrollViewDelegate
@@ -124,15 +101,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        addDaysIfNeeded(in: scrollView)
         handleDayChange()
-    }
-
-    private func addDaysIfNeeded(in scrollView: UIScrollView) {
-        let minButtomOffset = scrollView.contentOffset.y + self.view.frame.size.height + Config.minOffset
-        if  scrollView.contentSize.height <= minButtomOffset {
-            calendarService.addDaysAfter()
-        }
     }
 
     private func handleDayChange() {
@@ -147,11 +116,11 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
 
     // MARK: - Helpers
 
-    func day(at section: Int) -> DBDay {
+    private func day(at section: Int) -> DBDay {
         return fetchedResultsController.object(at: IndexPath(row: 0, section: section))
     }
 
-    func event(at indexPath: IndexPath) -> DBEvent? {
+    private func event(at indexPath: IndexPath) -> DBEvent? {
         let day = self.day(at: indexPath.section)
 
         guard day.events.count > indexPath.row else {

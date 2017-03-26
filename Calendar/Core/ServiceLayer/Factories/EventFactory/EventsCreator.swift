@@ -1,5 +1,5 @@
 //
-//  EventFactory.swift
+//  EventsCreator.swift
 //  Calendar
 //
 //  Created by Vitaliy Ampilogov on 2/12/17.
@@ -8,7 +8,7 @@
 
 import CoreData
 
-class EventFactory {
+class EventsCreator: IEventsCreator {
     
     let storage: IStorage
     let calendarService: ICalendarService
@@ -22,7 +22,7 @@ class EventFactory {
         self.generator = dataGenerator
     }
     
-    func createStaticEvents() {
+    func createStaticEvents(completion: @escaping () -> Swift.Void) {
         
         guard let currentDay = calendarService.fetchCurrentDay() else {
             return
@@ -59,23 +59,8 @@ class EventFactory {
                 // Add events to day
                 day?.events = dbEvents
             }
-        }, completion: nil)
-        
+        }, completion: {
+            completion()
+        })
     }
-    
-    var eventsDataSource = [
-        
-        [["title": "Meeting",
-         "location": "Moscow",
-         "duration": "10800",
-         "startTime": "324000"],
-         ["title": "Hiking",
-          "location": "Everest"]],
-      
-        [["title": "Work",
-         "location": "San Francisco"]],
-        
-        [["title": "Work2",
-         "location": "San Francisco2"]]
-    ]
 }

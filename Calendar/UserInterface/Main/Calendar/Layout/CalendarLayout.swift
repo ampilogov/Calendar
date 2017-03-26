@@ -29,7 +29,7 @@ class CalendarLayout: UICollectionViewFlowLayout {
         super.prepare()
         
         let numberOfItems = collectionView?.numberOfItems(inSection: 0) ?? 0
-        let rowHeight = SizeManager.dayItemHeight(viewWidth: collectionViewContentSize.width)
+        let rowHeight = SizeManager.dayItemHeight
         
         // Create Rects for separator decoration views every row (daysInWeek)
         DispatchQueue.global(qos: .userInteractive).async {
@@ -70,8 +70,4 @@ class CalendarLayout: UICollectionViewFlowLayout {
         
         return super.layoutAttributesForDecorationView(ofKind: elementKind, at: indexPath)
     }
-    
-//    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-//        return true
-//    }
 }

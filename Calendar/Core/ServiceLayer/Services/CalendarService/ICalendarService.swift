@@ -12,7 +12,6 @@ import CoreData
 protocol ICalendarService {
     
     /// FetchedResultsController
-    func createFetchedResultsController() -> NSFetchedResultsController<DBDay>
     func createFetchedResultsController(sectionName: String?) -> NSFetchedResultsController<DBDay>
     
     /// Prepare Calendar
@@ -20,9 +19,6 @@ protocol ICalendarService {
     
     /// Get current day
     func fetchCurrentDay() -> DBDay?
-    
-    /// Add days after last day in calendar
-    func addDaysAfter()
     
     /// Clean calendar
     func deleteAll()

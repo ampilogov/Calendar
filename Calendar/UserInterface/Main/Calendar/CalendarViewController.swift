@@ -9,20 +9,9 @@
 import UIKit
 import CoreData
 
-private struct Config {
-    static let minOffset: CGFloat = 500.0
-}
-
-class CalendarViewController:   UIViewController,
-                                IDayUpdatable,
-                                NSFetchedResultsControllerDelegate,
-                                UICollectionViewDataSource,
-                                UICollectionViewDelegate,
-                                UICollectionViewDelegateFlowLayout {
+class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    var itemSize: CGFloat = 0.0
     
     private let calendarService = Locator.shared.calendarService()
     private var fetchedResultsController: NSFetchedResultsController<DBDay>
@@ -32,26 +21,18 @@ class CalendarViewController:   UIViewController,
     // MARK: - Livecycle
     
     required init?(coder aDecoder: NSCoder) {
-        fetchedResultsController = calendarService.createFetchedResultsController()
+        fetchedResultsController = calendarService.createFetchedResultsController(sectionName: nil)
         super.init(coder: aDecoder)
-        fetchedResultsController.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         configureCollectionViewLayout()
     }
     
     private func configureCollectionViewLayout() {
-        itemSize = collectionView.frame.size.width / 7
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.invalidateLayout()
-            layout.itemSize = CGSize(width: itemSize, height: itemSize)
+            layout.itemSize = CGSize(width: SizeManager.dayItemWidth, height: SizeManager.dayItemHeight)
         }
     }
     
@@ -59,6 +40,7 @@ class CalendarViewController:   UIViewController,
     
     func update(day: DBDay, animated: Bool) {
         let indexPath = fetchedResultsController.indexPath(forObject: day)
+        if indexPath == collectionView.indexPathsForSelectedItems?.first { return }
         collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
         
         if let indexPath = indexPath {
@@ -101,20 +83,6 @@ class CalendarViewController:   UIViewController,
         delegate?.didSelectDay(selectedDay)
     }
     
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.collectionView.reloadData()
-        self.navigationItem.title = "\(controller.fetchedObjects?.count)"
-    }
-    
     // MARK: - UIScrollViewDelegate
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -124,12 +92,4 @@ class CalendarViewController:   UIViewController,
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.calendarDidEndScrolling()
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let minButtomOffset = scrollView.contentOffset.y + self.view.frame.size.height + Config.minOffset
-        if  scrollView.contentSize.height <= minButtomOffset {
-            calendarService.addDaysAfter()
-        }
-    }
-    
 }

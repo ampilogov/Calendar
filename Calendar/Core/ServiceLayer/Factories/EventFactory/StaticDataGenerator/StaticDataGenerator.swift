@@ -19,34 +19,29 @@ private struct Constants {
     static let maxEventsPerDay: UInt32 = 5
 }
 
-class StaticDataGenerator {
+class StaticDataGenerator: IStaticDataGenerator {
     
     private let staticData = StaticData()
     fileprivate let timeZoneOffset: TimeInterval = TimeInterval(NSTimeZone.system.secondsFromGMT())
     
-    func generateEventTitle() -> String {
+    private func generateEventTitle() -> String {
         return staticData.activities.randomElement
     }
     
-    func generateLocation() -> String {
+    private func generateLocation() -> String {
         return staticData.cities.randomElement
     }
     
-    func generateDuration() -> TimeInterval {
+    private func generateDuration() -> TimeInterval {
         return TimeInterval.hour * Double(arc4random_uniform(Constants.maxDuration) + 1)
     }
     
-    func generateStartDate(for date: Date) -> Date {
+    private func generateStartDate(for date: Date) -> Date {
         let startTime = TimeInterval.hour * Double(arc4random_uniform(Constants.maxStartTime) + 1)
         return date.addingTimeInterval(startTime)
     }
-}
-
-extension StaticDataGenerator: IStaticDataGenerator {
     
-    func generateEvents(for date: Date) -> [EventInfo] {
-        
-        let dayDate = date.addingTimeInterval(-timeZoneOffset)
+    func generateEvents(for dayDate: Date) -> [EventInfo] {
         
         var events = [EventInfo]()
         let numberOfEvents = arc4random_uniform(Constants.maxEventsPerDay) + 1
