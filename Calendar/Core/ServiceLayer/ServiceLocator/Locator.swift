@@ -22,6 +22,11 @@ class Locator {
         return services[String(describing: type(of: IStorage.self))] as? IStorage
     }
     
+    func calendarInitializator() -> ICalendarInitializator {
+        return CalendarInitializator(storage: storage(),
+                                     eventsCreator: eventsCreator())
+    }
+    
     func calendarService() -> ICalendarService {
         return CalendarService(storage: storage())
     }

@@ -14,18 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // Dependencies
-    let calendarService = Locator.shared.calendarService()
+    let calendarInitializator = Locator.shared.calendarInitializator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        calendarService.deleteAll()
-        
-        calendarService.initializeCalendar {
-            DispatchQueue.main.async {
-                let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
-                let vc = sb.instantiateViewController(withIdentifier: "MainVC")
-                self.window?.rootViewController  = vc
-            }
+
+        calendarInitializator.initializeCalendar {
+            let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc = sb.instantiateViewController(withIdentifier: "MainVC")
+            self.window?.rootViewController  = vc
         }
         
         return true

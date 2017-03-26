@@ -6,7 +6,6 @@
 //  Copyright © 2016 v.ampilogov. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 protocol ICalendarService {
@@ -14,12 +13,6 @@ protocol ICalendarService {
     /// FetchedResultsController
     func createFetchedResultsController(sectionName: String?) -> NSFetchedResultsController<DBDay>
     
-    /// Prepare Calendar
-    func initializeCalendar(completion: @escaping () -> Swift.Void)
-    
     /// Get current day
     func fetchCurrentDay() -> DBDay?
-    
-    /// Clean calendar
-    func deleteAll()
 }

@@ -15,6 +15,7 @@ class Storage: IStorage {
 
     let saveQueue = DispatchQueue(label: "StorageQueue")
     private(set) var readContext: NSManagedObjectContext
+    private var contextPool = [String: NSManagedObjectContext]()
     
     init() {
         
@@ -52,20 +53,57 @@ class Storage: IStorage {
     
     // MARK: - IStorage Protocol
     
-    /// Perform background task in storage with automatic save
-    
     func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: (() -> Swift.Void)?) {
         
         saveQueue.async {
-            let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            context.parent = self.readContext
+            let context = self.contextForCurrentThread()
             block(context)
             self.saveChanges(context)
             completion?()
         }
     }
     
-    /// Delete all objects from Entity
+    func fetch<T: NSFetchRequestResult>(_ request: NSFetchRequest<T>) -> [T] {
+        
+        let context = contextForCurrentThread()
+        var allObjects = [T]()
+        
+        do {
+            allObjects = try context.fetch(request)
+        } catch {
+            let nserror = error as NSError
+            fatalError("Cant't fetch objects. Error: \(nserror), \(nserror.userInfo)")
+        }
+        
+        return allObjects
+    }
+    
+    func contextForCurrentThread() -> NSManagedObjectContext {
+        if Thread.isMainThread {
+            return readContext
+        } else {
+            let threadId = String(pthread_mach_thread_np(pthread_self()))
+            if let context = contextPool[threadId] {
+                // Context for this thread already created
+                return context
+            } else {
+                // Create context for this thread
+                let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+                context.parent = readContext
+                contextPool[threadId] = context
+                return context
+            }
+        }
+    }
+    
+    func isEntityEmpty(entityName: String) -> Bool {
+        let context = contextForCurrentThread()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let count = try? context.count(for: request)
+        
+        return count == 0
+    }
+    
     func cleanEntity(entityName: String) {
         
         performBackgroundTaskAndSave({ (context) in
@@ -79,7 +117,7 @@ class Storage: IStorage {
                 }
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                fatalError("Cant't clean entity. Error: \(nserror), \(nserror.userInfo)")
             }
     }, completion: nil)
     }
@@ -99,7 +137,7 @@ class Storage: IStorage {
                         try contextToSave?.save()
                     } catch {
                         let nserror = error as NSError
-                        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                        fatalError("Cant't save context. Error: \(nserror), \(nserror.userInfo)")
                     }
                 }
             }
