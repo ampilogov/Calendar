@@ -8,6 +8,12 @@
 
 import CoreData
 
+protocol IEventsCreator {
+    
+    // Create random events for days in Data Base
+    func createStaticEvents(completion: @escaping () -> Swift.Void)
+}
+
 class EventsCreator: IEventsCreator {
     
     let storage: IStorage

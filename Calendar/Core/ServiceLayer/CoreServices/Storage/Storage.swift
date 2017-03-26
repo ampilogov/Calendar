@@ -6,10 +6,24 @@
 //  Copyright © 2016 v.ampilogov. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
-// MARK: - Core Data stack
+protocol IStorage: class {
+    
+    var readContext: NSManagedObjectContext { get }
+    
+    /// Perform task on background thread and save to parants contexts
+    func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: (() -> Swift.Void)?)
+    
+    /// Execute fetch request depend on curren thread
+    func fetch<T: NSFetchRequestResult>(_ request: NSFetchRequest<T>) -> [T]
+    
+    /// Entity is empty
+    func isEntityEmpty(entityName: String) -> Bool
+    
+    /// Delete all objects from entity
+    func cleanEntity(entityName: String)
+}
 
 class Storage: IStorage {
 
@@ -119,7 +133,7 @@ class Storage: IStorage {
                 let nserror = error as NSError
                 fatalError("Cant't clean entity. Error: \(nserror), \(nserror.userInfo)")
             }
-    }, completion: nil)
+        }, completion: nil)
     }
 
     // MARK: - Core Data Saving support

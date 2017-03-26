@@ -18,9 +18,9 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     @IBOutlet weak var weekDaysStackView: UIStackView!
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     
-    var calendarSynchronizer: CalendarSynchronizer?
+    private var calendarSynchronizer: CalendarSynchronizer?
     
-    lazy var dateFormatter: DateFormatter = {
+    lazy private var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         return dateFormatter
@@ -33,12 +33,12 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         calendarHeightConstraint.constant = SizeManager.calendarCollapsedHeight
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    func setupWeekDaysView() {
+    private func setupWeekDaysView() {
         for daySymbol in Calendar.current.veryShortWeekdaySymbols {
             let dayLabel = UILabel()
             dayLabel.text = daySymbol
@@ -48,7 +48,12 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         }
     }
     
-    func createSynchronizer() -> CalendarSynchronizer? {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.calendarSynchronizer = createSynchronizer()
+    }
+    
+    private func createSynchronizer() -> CalendarSynchronizer? {
         
         var synchronizer: CalendarSynchronizer?
         if let agendaVC = childViewController(forClass: AgendaViewController.self),
@@ -64,11 +69,6 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         return synchronizer
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.calendarSynchronizer = createSynchronizer()
-    }
-    
     // MARK: - IDayUpdatable
     
     func update(day: DBDay, animated: Bool) {
@@ -78,7 +78,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     // MARK: - IScrollHandler
     
     func didBeginScrollCalendar() {
-        calendarHeightConstraint.constant = 64
+        calendarHeightConstraint.constant = SizeManager.calendarDefaultHeight
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }

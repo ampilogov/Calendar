@@ -15,7 +15,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     private let calendarService = Locator.shared.calendarService()
     private let fetchedResultsController: NSFetchedResultsController<DBDay>
-    private let cellConfigurator = EventCellConfigurator()
+    private let configurator = AgendaCellConfigurator()
 
     weak var delegate: AgendaViewControllerDelegate?
 
@@ -58,10 +58,10 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
         if let event = self.event(at: indexPath),
             let eventCell = tableView.dequeueReusableCell(withIdentifier: EventCell.className, for: indexPath) as? EventCell {
             
-            cellConfigurator.configure(eventCell, with: event)
+            configurator.configure(eventCell, with: event)
             cell = eventCell
         } else {
-            cellConfigurator.configure(emptyCell: cell)
+            configurator.configure(emptyCell: cell)
         }
         
         return cell
@@ -75,15 +75,13 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.font = UIFont.systemFont(ofSize: 15)
-            header.textLabel?.textColor = .gray
-            header.backgroundView?.backgroundColor = .flatGray
+            let day = self.day(at: section)
+            configurator.configure(headerView: header, with: day.date)
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let day = self.day(at: section)
-        return day.formattedDate()
+        return " "
     }
 
     // MARK: - UIScrollViewDelegate

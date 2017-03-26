@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol IDayUpdatable: class {
+    func update(day: DBDay, animated: Bool)
+}
+
 protocol CalendarViewControllerDelegate: class {
     func didSelectDay(_ day: DBDay)
     func calendarDidBeginScrolling()
@@ -27,7 +31,7 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
         case scrolling
     }
     
-    let calendarService = Locator.shared.calendarService()
+    private let calendarService = Locator.shared.calendarService()
     private var state = State.synchronized
     
     unowned var calendarViewController: IDayUpdatable

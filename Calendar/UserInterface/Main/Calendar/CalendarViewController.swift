@@ -15,6 +15,7 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     
     private let calendarService = Locator.shared.calendarService()
     private var fetchedResultsController: NSFetchedResultsController<DBDay>
+    private let configurator = CalendarCellConfigurator()
     
     weak var delegate: CalendarViewControllerDelegate?
     
@@ -68,9 +69,7 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.className, for: indexPath)
         if let day = fetchedResultsController.fetchedObjects?[indexPath.row],
             let cell = cell as? DayCollectionCell {
-            let viewModel = CalendarDayViewModel(date: day.date)
-            cell.titleLabel.text = viewModel.formattedDate
-            cell.containerView.backgroundColor = viewModel.backgroundColor
+            configurator.configure(cell, with: day.date)
         }
         
         return cell

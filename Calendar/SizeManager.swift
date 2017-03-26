@@ -10,14 +10,14 @@ import UIKit
 
 class SizeManager {
     
-    static let offsetToLoadDays: CGFloat = 500.0
+    static let dayItemWidth = dayItemHeight
     
     static var dayItemHeight: CGFloat {
         let screenWidth = UIApplication.shared.delegate?.window??.frame.size.width ?? 0
         return screenWidth / CGFloat(Calendar.current.daysInWeek)
     }
     
-    static var dayItemWidth = dayItemHeight
+    static let calendarDefaultHeight: CGFloat = 64.0
     
     static var calendarCollapsedHeight: CGFloat {
         let screenHeight = UIApplication.shared.delegate?.window??.frame.size.height ?? 0

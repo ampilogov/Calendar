@@ -8,7 +8,15 @@
 
 import CoreData
 
-/// Manage days list
+protocol ICalendarService {
+    
+    /// FetchedResultsController
+    func createFetchedResultsController(sectionName: String?) -> NSFetchedResultsController<DBDay>
+    
+    /// Get current day
+    func fetchCurrentDay() -> DBDay?
+}
+
 class CalendarService: ICalendarService {
 
     private let storage: IStorage

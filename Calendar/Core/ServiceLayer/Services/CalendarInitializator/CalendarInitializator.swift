@@ -1,5 +1,5 @@
 //
-//  Launcher.swift
+//  CalendarInitializator.swift
 //  Calendar
 //
 //  Created by Vitaliy Ampilogov on 3/26/17.
@@ -7,6 +7,12 @@
 //
 
 import CoreData
+
+protocol ICalendarInitializator {
+    
+    /// Prepare Calendar
+    func initializeCalendar(completion: @escaping () -> Swift.Void)
+}
 
 private struct Const {
     static let initialDate = "01.01.2012"
