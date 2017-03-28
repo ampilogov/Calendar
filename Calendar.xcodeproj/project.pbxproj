@@ -42,19 +42,11 @@
 		312B227E1DF2EB270071E867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312B227D1DF2EB270071E867 /* Assets.xcassets */; };
 		312B22811DF2EB270071E867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312B227F1DF2EB270071E867 /* LaunchScreen.storyboard */; };
 		312B228C1DF2EB270071E867 /* CalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B228B1DF2EB270071E867 /* CalendarTests.swift */; };
-		312B22971DF2EB270071E867 /* CalendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B22961DF2EB270071E867 /* CalendarUITests.swift */; };
 		31F94AFD1E1024BF00ED804A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 31F94AFC1E1024BF00ED804A /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		312B22881DF2EB270071E867 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 312B22681DF2EB260071E867 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 312B226F1DF2EB270071E867;
-			remoteInfo = Calendar;
-		};
-		312B22931DF2EB270071E867 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 312B22681DF2EB260071E867 /* Project object */;
 			proxyType = 1;
@@ -103,9 +95,6 @@
 		312B22871DF2EB270071E867 /* CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		312B228B1DF2EB270071E867 /* CalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTests.swift; sourceTree = "<group>"; };
 		312B228D1DF2EB270071E867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		312B22921DF2EB270071E867 /* CalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		312B22961DF2EB270071E867 /* CalendarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUITests.swift; sourceTree = "<group>"; };
-		312B22981DF2EB270071E867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31F94AFC1E1024BF00ED804A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,13 +107,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		312B22841DF2EB270071E867 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		312B228F1DF2EB270071E867 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -377,7 +359,6 @@
 				31F94AFC1E1024BF00ED804A /* .swiftlint.yml */,
 				312B22721DF2EB270071E867 /* Calendar */,
 				312B228A1DF2EB270071E867 /* CalendarTests */,
-				312B22951DF2EB270071E867 /* CalendarUITests */,
 				312B22711DF2EB270071E867 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -387,7 +368,6 @@
 			children = (
 				312B22701DF2EB270071E867 /* Calendar.app */,
 				312B22871DF2EB270071E867 /* CalendarTests.xctest */,
-				312B22921DF2EB270071E867 /* CalendarUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -410,15 +390,6 @@
 				312B228D1DF2EB270071E867 /* Info.plist */,
 			);
 			path = CalendarTests;
-			sourceTree = "<group>";
-		};
-		312B22951DF2EB270071E867 /* CalendarUITests */ = {
-			isa = PBXGroup;
-			children = (
-				312B22961DF2EB270071E867 /* CalendarUITests.swift */,
-				312B22981DF2EB270071E867 /* Info.plist */,
-			);
-			path = CalendarUITests;
 			sourceTree = "<group>";
 		};
 		312B22A81DF2ECC50071E867 /* Core */ = {
@@ -520,24 +491,6 @@
 			productReference = 312B22871DF2EB270071E867 /* CalendarTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		312B22911DF2EB270071E867 /* CalendarUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 312B22A11DF2EB270071E867 /* Build configuration list for PBXNativeTarget "CalendarUITests" */;
-			buildPhases = (
-				312B228E1DF2EB270071E867 /* Sources */,
-				312B228F1DF2EB270071E867 /* Frameworks */,
-				312B22901DF2EB270071E867 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				312B22941DF2EB270071E867 /* PBXTargetDependency */,
-			);
-			name = CalendarUITests;
-			productName = CalendarUITests;
-			productReference = 312B22921DF2EB270071E867 /* CalendarUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -554,12 +507,6 @@
 						ProvisioningStyle = Automatic;
 					};
 					312B22861DF2EB270071E867 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8SEFGGQX9M;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 312B226F1DF2EB270071E867;
-					};
-					312B22911DF2EB270071E867 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 8SEFGGQX9M;
 						ProvisioningStyle = Automatic;
@@ -582,7 +529,6 @@
 			targets = (
 				312B226F1DF2EB270071E867 /* Calendar */,
 				312B22861DF2EB270071E867 /* CalendarTests */,
-				312B22911DF2EB270071E867 /* CalendarUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -600,13 +546,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		312B22851DF2EB270071E867 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		312B22901DF2EB270071E867 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -678,14 +617,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		312B228E1DF2EB270071E867 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				312B22971DF2EB270071E867 /* CalendarUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -693,11 +624,6 @@
 			isa = PBXTargetDependency;
 			target = 312B226F1DF2EB270071E867 /* Calendar */;
 			targetProxy = 312B22881DF2EB270071E867 /* PBXContainerItemProxy */;
-		};
-		312B22941DF2EB270071E867 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 312B226F1DF2EB270071E867 /* Calendar */;
-			targetProxy = 312B22931DF2EB270071E867 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -874,34 +800,6 @@
 			};
 			name = Release;
 		};
-		312B22A21DF2EB270071E867 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 8SEFGGQX9M;
-				INFOPLIST_FILE = CalendarUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Ampilogov.CalendarUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Calendar;
-			};
-			name = Debug;
-		};
-		312B22A31DF2EB270071E867 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 8SEFGGQX9M;
-				INFOPLIST_FILE = CalendarUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Ampilogov.CalendarUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Calendar;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -928,15 +826,6 @@
 			buildConfigurations = (
 				312B229F1DF2EB270071E867 /* Debug */,
 				312B22A01DF2EB270071E867 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		312B22A11DF2EB270071E867 /* Build configuration list for PBXNativeTarget "CalendarUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				312B22A21DF2EB270071E867 /* Debug */,
-				312B22A31DF2EB270071E867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
