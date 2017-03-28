@@ -30,6 +30,11 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         super.viewDidLoad()
         setupNavigationBar()
         setupWeekDaysView()
+        setupView()
+    }
+    
+    private func setupView() {
+        view.alpha = 0
         calendarHeightConstraint.constant = SizeManager.calendarCollapsedHeight
     }
     
@@ -50,6 +55,10 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Fade appearance animation
+        UIView.animate(withDuration: 0.3) {
+            self.view.alpha = 1
+        }
         self.calendarSynchronizer = createSynchronizer()
     }
     
