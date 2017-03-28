@@ -17,14 +17,6 @@ class CalendarTests: XCTestCase {
     let generator = Locator.shared.staticDataGenerator()
     let calendarService = Locator.shared.calendarService()
     
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
     func testSaveToStorage() {
         clearStorage()
         createObjectInStorage()
