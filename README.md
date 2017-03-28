@@ -9,3 +9,11 @@ The Agenda view is a continuously scrolling view that allows the user to browse 
 <p align="center">
   <img src="./Attachments/Screen1.png" />
 </p>
+
+License
+----
+
+MIT
+
+
+**Ampilogov Vitaliy**
