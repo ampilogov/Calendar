@@ -55,7 +55,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Fade appearance animation
+        // Appearance with Fade animation
         UIView.animate(withDuration: 0.3) {
             self.view.alpha = 1
         }

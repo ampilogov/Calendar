@@ -10,17 +10,21 @@ import UIKit
 
 class SizeManager {
     
+    static let navigationBarHeight: CGFloat = 64.0
+    static let separatorHeight: CGFloat = 1 / UIScreen.main.scale
     static let dayItemWidth = dayItemHeight
+    static let screenHeight = UIApplication.shared.delegate?.window??.frame.size.height ?? 0
+    static let screenWidth = UIApplication.shared.delegate?.window??.frame.size.width ?? 0
     
     static var dayItemHeight: CGFloat {
-        let screenWidth = UIApplication.shared.delegate?.window??.frame.size.width ?? 0
         return screenWidth / CGFloat(Calendar.current.daysInWeek)
     }
     
-    static let calendarDefaultHeight: CGFloat = 64.0
+    static var calendarDefaultHeight: CGFloat {
+        return screenHeight / 2 - navigationBarHeight
+    }
     
     static var calendarCollapsedHeight: CGFloat {
-        let screenHeight = UIApplication.shared.delegate?.window??.frame.size.height ?? 0
-        return screenHeight / 2 + dayItemHeight * 2 - 75
+        return dayItemHeight * 2 + separatorHeight
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="37b-6T-CaD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="37b-6T-CaD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,11 +18,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="441.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="283"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-91-QDC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="441.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" rowHeight="60" id="XK3-27-acW" customClass="EventCell" customModule="Calendar" customModuleProvider="target">
@@ -173,13 +173,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-ha-2p3">
-                                <rect key="frame" x="0.0" y="161.5" width="375" height="441.5"/>
+                                <rect key="frame" x="0.0" y="320" width="375" height="283"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="embed" id="PwG-WX-rCn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWZ-kv-qpF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="141.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="bKU-JB-b3j"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="eaD-UN-rx2" kind="embed" id="x5v-R8-DvT"/>
                                 </connections>
@@ -218,7 +221,6 @@
                             <constraint firstItem="0WW-ha-2p3" firstAttribute="top" secondItem="pWZ-kv-qpF" secondAttribute="bottom" id="Mu1-Uh-kLX"/>
                             <constraint firstItem="pWZ-kv-qpF" firstAttribute="top" secondItem="I1G-Fk-IAR" secondAttribute="bottom" id="Tsa-BZ-lrH"/>
                             <constraint firstItem="1cE-RG-pg4" firstAttribute="top" secondItem="0WW-ha-2p3" secondAttribute="bottom" id="ZQZ-Kc-X7h"/>
-                            <constraint firstItem="0WW-ha-2p3" firstAttribute="height" secondItem="pWZ-kv-qpF" secondAttribute="height" constant="300" id="bAD-Uo-PZ1"/>
                             <constraint firstItem="0WW-ha-2p3" firstAttribute="leading" secondItem="Hpg-pA-41b" secondAttribute="leading" id="ctT-4y-ats"/>
                             <constraint firstAttribute="trailing" secondItem="pWZ-kv-qpF" secondAttribute="trailing" id="hRY-dZ-Vw2"/>
                             <constraint firstItem="I1G-Fk-IAR" firstAttribute="leading" secondItem="Hpg-pA-41b" secondAttribute="leading" id="jyd-kV-Ckf"/>
@@ -231,7 +233,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="calendarHeightConstraint" destination="bAD-Uo-PZ1" id="6tP-DJ-SQQ"/>
+                        <outlet property="calendarHeightConstraint" destination="bKU-JB-b3j" id="139-DW-sVd"/>
                         <outlet property="weekDaysStackView" destination="cMi-Y7-viy" id="Pkr-at-fgJ"/>
                     </connections>
                 </viewController>
@@ -248,11 +250,11 @@
                         <viewControllerLayoutGuide type="bottom" id="gcW-Pc-Zlj"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="UZm-fz-4VD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="141.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YXC-zI-xNm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="141.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="kNB-iQ-LHy" customClass="CalendarLayout" customModule="Calendar" customModuleProvider="target"/>
                                 <cells>

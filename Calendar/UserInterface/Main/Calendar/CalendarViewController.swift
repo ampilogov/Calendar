@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
                         self.collectionView.contentOffset = offset
                     })
                 } else {
-                    collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                    collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
                 }
             }
         }

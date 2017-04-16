@@ -12,8 +12,6 @@ class CalendarLayout: UICollectionViewFlowLayout {
     
     // Rects for separator decoration view
     var separatorViewsRects = [IndexPath: CGRect]()
-    
-    let separatorHeight = 1 / UIScreen.main.scale
     let daysInWeek = Calendar.current.daysInWeek
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +38,7 @@ class CalendarLayout: UICollectionViewFlowLayout {
                     self.separatorViewsRects[indexPath] = CGRect(x: 0,
                                                                  y: yPosition,
                                                                  width: self.collectionViewContentSize.width,
-                                                                 height: self.separatorHeight)
+                                                                 height: SizeManager.separatorHeight)
                 }
             }
         }
