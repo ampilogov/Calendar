@@ -16,7 +16,7 @@ protocol IStorage: class {
     func performBackgroundTaskAndSave(_ block: @escaping (NSManagedObjectContext) -> Void, completion: (() -> Swift.Void)?)
     
     /// Execute fetch request depend on curren thread
-    func fetch<T: NSFetchRequestResult>(_ request: NSFetchRequest<T>) -> [T]
+    func fetch<T>(_ request: NSFetchRequest<T>) -> [T]
     
     /// Entity is empty
     func isEntityEmpty(entityName: String) -> Bool
@@ -54,8 +54,8 @@ class Storage: IStorage {
         let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
         let storeURL = docURL?.appendingPathComponent("DataModel.sqlite")
         let options = [
-            NSMigratePersistentStoresAutomaticallyOption: Int(true),
-            NSInferMappingModelAutomaticallyOption: Int(true)
+            NSMigratePersistentStoresAutomaticallyOption: Int(truncating: true),
+            NSInferMappingModelAutomaticallyOption: Int(truncating: true)
         ]
         
         do {
@@ -77,7 +77,7 @@ class Storage: IStorage {
         }
     }
     
-    func fetch<T: NSFetchRequestResult>(_ request: NSFetchRequest<T>) -> [T] {
+    func fetch<T>(_ request: NSFetchRequest<T>) -> [T] {
         
         let context = contextForCurrentThread()
         var allObjects = [T]()
