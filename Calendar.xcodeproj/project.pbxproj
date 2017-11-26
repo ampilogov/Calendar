@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000535171FC9880C00C13A0A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000535161FC9880C00C13A0A /* Const.swift */; };
+		0005351A1FC98FAD00C13A0A /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000535191FC98FAD00C13A0A /* DateHelper.swift */; };
 		00FF1E111FC9619B00AA234C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD61FC9619B00AA234C /* Storage.swift */; };
 		00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD71FC9619B00AA234C /* DataModel.xcdatamodeld */; };
 		00FF1E131FC9619B00AA234C /* Locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DDA1FC9619B00AA234C /* Locator.swift */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000535161FC9880C00C13A0A /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		000535191FC98FAD00C13A0A /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		00FF1DD61FC9619B00AA234C /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00FF1DD81FC9619B00AA234C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		00FF1DDA1FC9619B00AA234C /* Locator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locator.swift; sourceTree = "<group>"; };
@@ -116,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000535181FC9890100C13A0A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				000535191FC98FAD00C13A0A /* DateHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		00FF1DD11FC9617C00AA234C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,8 +143,8 @@
 			children = (
 				00FF1DD31FC9619B00AA234C /* ServiceLayer */,
 				00FF1DEB1FC9619B00AA234C /* Constants */,
-				00FF1DEC1FC9619B00AA234C /* Components */,
 				00FF1DEF1FC9619B00AA234C /* Extantions */,
+				000535181FC9890100C13A0A /* Helpers */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -246,6 +258,7 @@
 		00FF1DEB1FC9619B00AA234C /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				000535161FC9880C00C13A0A /* Const.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -339,6 +352,7 @@
 		00FF1DFE1FC9619B00AA234C /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				00FF1DEC1FC9619B00AA234C /* Components */,
 				00FF1E301FC9624200AA234C /* Main.storyboard */,
 				00FF1DFF1FC9619B00AA234C /* Main */,
 			);
@@ -592,10 +606,12 @@
 				00FF1E261FC9619B00AA234C /* CalendarViewController.swift in Sources */,
 				00FF1E151FC9619B00AA234C /* EventInfo.swift in Sources */,
 				00FF1E211FC9619B00AA234C /* Date+Calculation.swift in Sources */,
+				0005351A1FC98FAD00C13A0A /* DateHelper.swift in Sources */,
 				00FF1E191FC9619B00AA234C /* DBDay.swift in Sources */,
 				00FF1E131FC9619B00AA234C /* Locator.swift in Sources */,
 				00FF1E2A1FC9619B00AA234C /* EventCell.swift in Sources */,
 				00FF1E141FC9619B00AA234C /* CalendarInitializator.swift in Sources */,
+				000535171FC9880C00C13A0A /* Const.swift in Sources */,
 				00FF1E2B1FC9619B00AA234C /* AgendaViewController.swift in Sources */,
 				00FF1E251FC9619B00AA234C /* CalendarLayout.swift in Sources */,
 				00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */,
