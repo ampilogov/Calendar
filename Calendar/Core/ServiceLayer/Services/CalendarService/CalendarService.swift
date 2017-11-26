@@ -27,12 +27,12 @@ class CalendarService: ICalendarService {
     }
 
     // Mark: - ICalendarService Protocol
-        
+    
     func fetchCurrentDay() -> DBDay? {
         let request = createDaysRequest()
         request.predicate = NSPredicate(format: "date == %@", argumentArray: [currentDate])
-        let result = storage.fetch(request)
-        return result.first
+       // let result = storage.fetch(request)
+        return nil
     }
     
     // MARK: - Helpers

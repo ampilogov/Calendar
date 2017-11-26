@@ -11,9 +11,7 @@ import CoreData
 
 @objc(DBDay)
 class DBDay: NSManagedObject {
-    
-    static let entityName = "Day"
-    
+        
     @nonobjc class func fetchRequest() -> NSFetchRequest<DBDay> {
         return NSFetchRequest<DBDay>(entityName: entityName)
     }

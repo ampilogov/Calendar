@@ -11,8 +11,6 @@ import CoreData
 @objc(DBEvent)
 class DBEvent: NSManagedObject {
     
-    static let entityName = "Event"
-    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DBEvent> {
         return NSFetchRequest<DBEvent>(entityName: entityName)
     }

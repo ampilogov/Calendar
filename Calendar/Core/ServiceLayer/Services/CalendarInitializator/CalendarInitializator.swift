@@ -31,7 +31,8 @@ class CalendarInitializator: ICalendarInitializator {
     }
     
     private var isCalendarInitialized: Bool {
-        return !storage.isEntityEmpty(entityName: DBDay.entityName)
+        return true
+//        return !storage.isEntityEmpty(entityName: DBDay.entityName)
     }
     
     func initializeCalendar(completion: @escaping () -> Void) {

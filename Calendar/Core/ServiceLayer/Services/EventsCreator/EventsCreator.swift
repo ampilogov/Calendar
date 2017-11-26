@@ -30,6 +30,11 @@ class EventsCreator: IEventsCreator {
     
     func createStaticEvents(completion: @escaping () -> Swift.Void) {
         
+        completion()
+        return
+        
+        /*
+        
         guard let currentDay = calendarService.fetchCurrentDay() else {
             return
         }
@@ -67,6 +72,6 @@ class EventsCreator: IEventsCreator {
             }
         }, completion: {
             completion()
-        })
+        })*/
     }
 }

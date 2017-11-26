@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		000535171FC9880C00C13A0A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000535161FC9880C00C13A0A /* Const.swift */; };
 		0005351A1FC98FAD00C13A0A /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000535191FC98FAD00C13A0A /* DateHelper.swift */; };
+		0005351C1FCB2D6900C13A0A /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005351B1FCB2D6900C13A0A /* Persistable.swift */; };
+		000535201FCB32B600C13A0A /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005351F1FCB32B600C13A0A /* NSManagedObject.swift */; };
 		00FF1E111FC9619B00AA234C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD61FC9619B00AA234C /* Storage.swift */; };
 		00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD71FC9619B00AA234C /* DataModel.xcdatamodeld */; };
 		00FF1E131FC9619B00AA234C /* Locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DDA1FC9619B00AA234C /* Locator.swift */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		000535161FC9880C00C13A0A /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		000535191FC98FAD00C13A0A /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		0005351B1FCB2D6900C13A0A /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
+		0005351F1FCB32B600C13A0A /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		00FF1DD61FC9619B00AA234C /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00FF1DD81FC9619B00AA234C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		00FF1DDA1FC9619B00AA234C /* Locator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locator.swift; sourceTree = "<group>"; };
@@ -128,6 +132,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0005351E1FCB329900C13A0A /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				0005351F1FCB32B600C13A0A /* NSManagedObject.swift */,
+			);
+			path = NSManagedObject;
+			sourceTree = "<group>";
+		};
 		00FF1DD11FC9617C00AA234C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +182,7 @@
 		00FF1DD51FC9619B00AA234C /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				0005351B1FCB2D6900C13A0A /* Persistable.swift */,
 				00FF1DD61FC9619B00AA234C /* Storage.swift */,
 				00FF1DD71FC9619B00AA234C /* DataModel.xcdatamodeld */,
 			);
@@ -288,6 +301,7 @@
 				00FF1DF61FC9619B00AA234C /* Array */,
 				00FF1DF81FC9619B00AA234C /* Date */,
 				00FF1DFA1FC9619B00AA234C /* UIViewController */,
+				0005351E1FCB329900C13A0A /* NSManagedObject */,
 				00FF1DFC1FC9619B00AA234C /* NSObject */,
 			);
 			path = Extantions;
@@ -614,6 +628,7 @@
 				000535171FC9880C00C13A0A /* Const.swift in Sources */,
 				00FF1E2B1FC9619B00AA234C /* AgendaViewController.swift in Sources */,
 				00FF1E251FC9619B00AA234C /* CalendarLayout.swift in Sources */,
+				000535201FCB32B600C13A0A /* NSManagedObject.swift in Sources */,
 				00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */,
 				00FF1E241FC9619B00AA234C /* DayCollectionCell.swift in Sources */,
 				00FF1E1C1FC9619B00AA234C /* RoundedView.swift in Sources */,
@@ -621,6 +636,7 @@
 				00FF1E1B1FC9619B00AA234C /* CalendarService.swift in Sources */,
 				00FF1E171FC9619B00AA234C /* StaticData.swift in Sources */,
 				00FF1E221FC9619B00AA234C /* UIViewController+ChildViewController.swift in Sources */,
+				0005351C1FCB2D6900C13A0A /* Persistable.swift in Sources */,
 				00FF1E281FC9619B00AA234C /* SeparatorView.swift in Sources */,
 				00FF1E1E1FC9619B00AA234C /* UIColor+FlatColors.swift in Sources */,
 				312B22741DF2EB270071E867 /* AppDelegate.swift in Sources */,
@@ -776,7 +792,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
 				INFOPLIST_FILE = "$(SRCROOT)/Calendar/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ampilogov.Calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -792,7 +808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
 				INFOPLIST_FILE = "$(SRCROOT)/Calendar/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Ampilogov.Calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
