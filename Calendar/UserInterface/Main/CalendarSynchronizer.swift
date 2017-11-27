@@ -25,7 +25,7 @@ protocol AgendaViewControllerDelegate: class {
 }
 
 class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewControllerDelegate {
-
+    
     private enum State {
         case synchronized
         case scrolling

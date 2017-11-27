@@ -10,8 +10,8 @@ import CoreData
 
 protocol ICalendarService {
     
-    /// Get current day
-    func fetchCurrentDay() -> DBDay?
+    func cachedEvents() -> [Event]
+    
 }
 
 class CalendarService: ICalendarService {
@@ -25,23 +25,9 @@ class CalendarService: ICalendarService {
     init(storage: IStorage) {
         self.storage = storage
     }
-
-    // Mark: - ICalendarService Protocol
     
-    func fetchCurrentDay() -> DBDay? {
-        let request = createDaysRequest()
-        request.predicate = NSPredicate(format: "date == %@", argumentArray: [currentDate])
-       // let result = storage.fetch(request)
-        return nil
-    }
-    
-    // MARK: - Helpers
-    
-    private func createDaysRequest() -> NSFetchRequest<DBDay> {
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        let fetchRequest: NSFetchRequest<DBDay> = DBDay.fetchRequest()
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        return fetchRequest
+    func cachedEvents() -> [Event] {
+        let events = self.storage.fetch(Event.self)
+        return events
     }
 }

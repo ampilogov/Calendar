@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IStaticDataGenerator {
-    func generateEvents(for date: Date) -> [EventInfo]
+    func generateEvents(for date: Date) -> [Event]
 }
 
 private struct Constants {
@@ -41,16 +41,17 @@ class StaticDataGenerator: IStaticDataGenerator {
         return date.addingTimeInterval(startTime)
     }
     
-    func generateEvents(for dayDate: Date) -> [EventInfo] {
+    func generateEvents(for dayDate: Date) -> [Event] {
         
-        var events = [EventInfo]()
+        var events = [Event]()
         let numberOfEvents = arc4random_uniform(Constants.maxEventsPerDay) + 1
         var lastDate = generateStartDate(for: dayDate)
         for _ in 1...numberOfEvents {
-            let event = EventInfo(title: generateEventTitle(),
-                                  location: generateLocation(),
-                                  duration: generateDuration(),
-                                  startDate: lastDate)
+            let event = Event(identifier: UUID().uuidString,
+                          title: generateEventTitle(),
+                          location: generateLocation(),
+                          startDate: lastDate,
+                          duration: generateDuration())
             
             // Generate events just for current day
             if lastDate.timeIntervalSince1970 < dayDate.timeIntervalSince1970 + TimeInterval.day {

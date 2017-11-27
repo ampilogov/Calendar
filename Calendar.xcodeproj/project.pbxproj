@@ -11,16 +11,17 @@
 		0005351A1FC98FAD00C13A0A /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000535191FC98FAD00C13A0A /* DateHelper.swift */; };
 		0005351C1FCB2D6900C13A0A /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005351B1FCB2D6900C13A0A /* Persistable.swift */; };
 		000535201FCB32B600C13A0A /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005351F1FCB32B600C13A0A /* NSManagedObject.swift */; };
+		0090E47A1FCC9AE60084B18C /* AgendaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */; };
+		0090E47C1FCC9BFE0084B18C /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E47B1FCC9BFE0084B18C /* Aliases.swift */; };
 		00FF1E111FC9619B00AA234C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD61FC9619B00AA234C /* Storage.swift */; };
 		00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD71FC9619B00AA234C /* DataModel.xcdatamodeld */; };
 		00FF1E131FC9619B00AA234C /* Locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DDA1FC9619B00AA234C /* Locator.swift */; };
 		00FF1E141FC9619B00AA234C /* CalendarInitializator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DDD1FC9619B00AA234C /* CalendarInitializator.swift */; };
-		00FF1E151FC9619B00AA234C /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE11FC9619B00AA234C /* EventInfo.swift */; };
 		00FF1E161FC9619B00AA234C /* StaticDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE21FC9619B00AA234C /* StaticDataGenerator.swift */; };
 		00FF1E171FC9619B00AA234C /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE41FC9619B00AA234C /* StaticData.swift */; };
 		00FF1E181FC9619B00AA234C /* EventsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE51FC9619B00AA234C /* EventsCreator.swift */; };
 		00FF1E191FC9619B00AA234C /* DBDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE81FC9619B00AA234C /* DBDay.swift */; };
-		00FF1E1A1FC9619B00AA234C /* DBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE91FC9619B00AA234C /* DBEvent.swift */; };
+		00FF1E1A1FC9619B00AA234C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DE91FC9619B00AA234C /* Event.swift */; };
 		00FF1E1B1FC9619B00AA234C /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DEA1FC9619B00AA234C /* CalendarService.swift */; };
 		00FF1E1C1FC9619B00AA234C /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DEE1FC9619B00AA234C /* RoundedView.swift */; };
 		00FF1E1D1FC9619B00AA234C /* Calendar+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DF11FC9619B00AA234C /* Calendar+Constants.swift */; };
@@ -64,16 +65,17 @@
 		000535191FC98FAD00C13A0A /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		0005351B1FCB2D6900C13A0A /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
 		0005351F1FCB32B600C13A0A /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
+		0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDataManager.swift; sourceTree = "<group>"; };
+		0090E47B1FCC9BFE0084B18C /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		00FF1DD61FC9619B00AA234C /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00FF1DD81FC9619B00AA234C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		00FF1DDA1FC9619B00AA234C /* Locator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locator.swift; sourceTree = "<group>"; };
 		00FF1DDD1FC9619B00AA234C /* CalendarInitializator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarInitializator.swift; sourceTree = "<group>"; };
-		00FF1DE11FC9619B00AA234C /* EventInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfo.swift; sourceTree = "<group>"; };
 		00FF1DE21FC9619B00AA234C /* StaticDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticDataGenerator.swift; sourceTree = "<group>"; };
 		00FF1DE41FC9619B00AA234C /* StaticData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticData.swift; sourceTree = "<group>"; };
 		00FF1DE51FC9619B00AA234C /* EventsCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCreator.swift; sourceTree = "<group>"; };
 		00FF1DE81FC9619B00AA234C /* DBDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBDay.swift; sourceTree = "<group>"; };
-		00FF1DE91FC9619B00AA234C /* DBEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBEvent.swift; sourceTree = "<group>"; };
+		00FF1DE91FC9619B00AA234C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		00FF1DEA1FC9619B00AA234C /* CalendarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		00FF1DEE1FC9619B00AA234C /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		00FF1DF11FC9619B00AA234C /* Calendar+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+Constants.swift"; sourceTree = "<group>"; };
@@ -201,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				00FF1DDC1FC9619B00AA234C /* CalendarInitializator */,
-				00FF1DDE1FC9619B00AA234C /* EventsCreator */,
+				00FF1DDE1FC9619B00AA234C /* EventsGenerator */,
 				00FF1DE61FC9619B00AA234C /* CalendarService */,
 			);
 			path = Services;
@@ -215,31 +217,22 @@
 			path = CalendarInitializator;
 			sourceTree = "<group>";
 		};
-		00FF1DDE1FC9619B00AA234C /* EventsCreator */ = {
+		00FF1DDE1FC9619B00AA234C /* EventsGenerator */ = {
 			isa = PBXGroup;
 			children = (
 				00FF1DDF1FC9619B00AA234C /* StaticDataGenerator */,
 				00FF1DE51FC9619B00AA234C /* EventsCreator.swift */,
 			);
-			path = EventsCreator;
+			path = EventsGenerator;
 			sourceTree = "<group>";
 		};
 		00FF1DDF1FC9619B00AA234C /* StaticDataGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				00FF1DE01FC9619B00AA234C /* Models */,
 				00FF1DE21FC9619B00AA234C /* StaticDataGenerator.swift */,
 				00FF1DE31FC9619B00AA234C /* Data */,
 			);
 			path = StaticDataGenerator;
-			sourceTree = "<group>";
-		};
-		00FF1DE01FC9619B00AA234C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				00FF1DE11FC9619B00AA234C /* EventInfo.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		00FF1DE31FC9619B00AA234C /* Data */ = {
@@ -263,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				00FF1DE81FC9619B00AA234C /* DBDay.swift */,
-				00FF1DE91FC9619B00AA234C /* DBEvent.swift */,
+				00FF1DE91FC9619B00AA234C /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				000535161FC9880C00C13A0A /* Const.swift */,
+				0090E47B1FCC9BFE0084B18C /* Aliases.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -434,6 +428,7 @@
 			children = (
 				00FF1E0C1FC9619B00AA234C /* Cells */,
 				00FF1E0E1FC9619B00AA234C /* AgendaViewController.swift */,
+				0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */,
 				00FF1E0F1FC9619B00AA234C /* AgendaCellConfigurator.swift */,
 			);
 			path = Agenda;
@@ -615,10 +610,9 @@
 				00FF1E291FC9619B00AA234C /* MainViewController.swift in Sources */,
 				00FF1E1D1FC9619B00AA234C /* Calendar+Constants.swift in Sources */,
 				00FF1E2F1FC961C200AA234C /* SizeManager.swift in Sources */,
-				00FF1E1A1FC9619B00AA234C /* DBEvent.swift in Sources */,
+				00FF1E1A1FC9619B00AA234C /* Event.swift in Sources */,
 				00FF1E1F1FC9619B00AA234C /* TimeInterval+Constants.swift in Sources */,
 				00FF1E261FC9619B00AA234C /* CalendarViewController.swift in Sources */,
-				00FF1E151FC9619B00AA234C /* EventInfo.swift in Sources */,
 				00FF1E211FC9619B00AA234C /* Date+Calculation.swift in Sources */,
 				0005351A1FC98FAD00C13A0A /* DateHelper.swift in Sources */,
 				00FF1E191FC9619B00AA234C /* DBDay.swift in Sources */,
@@ -626,6 +620,7 @@
 				00FF1E2A1FC9619B00AA234C /* EventCell.swift in Sources */,
 				00FF1E141FC9619B00AA234C /* CalendarInitializator.swift in Sources */,
 				000535171FC9880C00C13A0A /* Const.swift in Sources */,
+				0090E47C1FCC9BFE0084B18C /* Aliases.swift in Sources */,
 				00FF1E2B1FC9619B00AA234C /* AgendaViewController.swift in Sources */,
 				00FF1E251FC9619B00AA234C /* CalendarLayout.swift in Sources */,
 				000535201FCB32B600C13A0A /* NSManagedObject.swift in Sources */,
@@ -638,6 +633,7 @@
 				00FF1E221FC9619B00AA234C /* UIViewController+ChildViewController.swift in Sources */,
 				0005351C1FCB2D6900C13A0A /* Persistable.swift in Sources */,
 				00FF1E281FC9619B00AA234C /* SeparatorView.swift in Sources */,
+				0090E47A1FCC9AE60084B18C /* AgendaDataManager.swift in Sources */,
 				00FF1E1E1FC9619B00AA234C /* UIColor+FlatColors.swift in Sources */,
 				312B22741DF2EB270071E867 /* AppDelegate.swift in Sources */,
 				00FF1E181FC9619B00AA234C /* EventsCreator.swift in Sources */,

@@ -36,31 +36,10 @@ class CalendarInitializator: ICalendarInitializator {
     }
     
     func initializeCalendar(completion: @escaping () -> Void) {
-        completion()
-//        if isCalendarInitialized {
-//            completion()
-//            return
-//        }
-//        
-//        storage.performBackgroundTaskAndSave({ (context) in
-//            guard
-//                var lastDate = self.dateFormatter.date(from: Const.initialDate),
-//                let finalDate = self.dateFormatter.date(from: Const.finalDate) else {
-//                    return
-//            }
-//            
-//            while lastDate < finalDate {
-//                let nextDate = lastDate.date(byAddingDays: 1)
-//                let day = NSEntityDescription.insertNewObject(forEntityName: DBDay.entityName, into: context) as? DBDay
-//                day?.date = lastDate
-//                lastDate = nextDate
-//            }
-//        }, completion: {
-//                self.eventsCreator.createStaticEvents(completion: {
-//                    DispatchQueue.main.async {
-//                        completion()
-//                    }
-//            })
-//        })
+        self.eventsCreator.createStaticEvents(completion: {
+            DispatchQueue.main.async {
+                completion()
+            }
+        })
     }
 }

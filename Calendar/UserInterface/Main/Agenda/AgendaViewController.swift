@@ -18,6 +18,8 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
 
     weak var delegate: AgendaViewControllerDelegate?
     private let dateHelper = DateHelper()
+    private let dataManager = AgendaDataManager()
+    lazy var eventsInDays = self.dataManager.eventsInDays()
     
     // MARK: - IDayUpdatable Prorocol
     
@@ -33,27 +35,26 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let day = self.day(at: section)
-//
-//        if day.events.count > 0 {
-//            return day.events.count
-//        } else {
+        if let events = eventsInDays[section] {
+            return events.count
+        } else {
             return 1
-//        }
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = UITableViewCell()
-//
-//        if let event = self.event(at: indexPath),
-//            let eventCell = tableView.dequeueReusableCell(withIdentifier: EventCell.className, for: indexPath) as? EventCell {
-//
-//            configurator.configure(eventCell, with: event)
-//            cell = eventCell
-//        } else {
+        let cell: UITableViewCell
+
+        if let events = eventsInDays[indexPath.section],
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: EventCell.className, for: indexPath) as? EventCell {
+
+            configurator.configure(eventCell, with: events[indexPath.row])
+            cell = eventCell
+        } else {
+            cell = UITableViewCell()
             configurator.configure(emptyCell: cell)
-//        }
+        }
         
         return cell
     }
@@ -102,19 +103,4 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
         }
         delegate?.agendaDidScrollToDay(at: indexPath.section)
     }
-
-    // MARK: - Helpers
-
-//    private func event(at indexPath: IndexPath) -> DBEvent? {
-//        let day = self.day(at: indexPath.section)
-//
-//        guard day.events.count > indexPath.row else {
-//            return nil
-//        }
-//
-//        let events = day.events.sorted { $0.startDate < $1.startDate }
-//
-//        return events[indexPath.row]
-//    }
-
 }

@@ -22,7 +22,7 @@ class AgendaCellConfigurator {
         return dateFormatter
     }()
     
-    func configure(_ eventCell: EventCell, with event: DBEvent) {
+    func configure(_ eventCell: EventCell, with event: Event) {
         let duration = String(Int(event.duration / 60 / 60)) + " h"
         let startTime = timeFormatter.string(from: event.startDate)
         eventCell.configure(title: event.title, location: event.location, startTime: startTime, duration: duration)
