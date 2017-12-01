@@ -30,8 +30,13 @@ class EventsCreator: IEventsCreator {
     
     func createStaticEvents(completion: @escaping () -> Swift.Void) {
         
-        for _ in 0...self.daysWithEvents {
-            let date = Calendar.current.startOfDay(for: Date())
+        guard self.storage.fetch(Event.self).count == 0 else {
+            completion()
+            return
+        }
+        
+        for i in 0...self.daysWithEvents {
+            let date = Calendar.current.startOfDay(for: Date().date(byAddingDays: i))
             let events = self.generator.generateEvents(for: date)
             self.storage.save(events)
         }

@@ -23,10 +23,11 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollectionViewLayout()
+        configureCollectionView()
     }
     
-    private func configureCollectionViewLayout() {
+    private func configureCollectionView() {
+        collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: SizeManager.dayItemWidth, height: SizeManager.dayItemHeight)
         }

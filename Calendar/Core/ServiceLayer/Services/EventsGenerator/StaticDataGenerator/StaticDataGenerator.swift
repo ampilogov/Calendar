@@ -44,14 +44,14 @@ class StaticDataGenerator: IStaticDataGenerator {
     func generateEvents(for dayDate: Date) -> [Event] {
         
         var events = [Event]()
-        let numberOfEvents = arc4random_uniform(Constants.maxEventsPerDay) + 1
+        let numberOfEvents = arc4random_uniform(Constants.maxEventsPerDay)
         var lastDate = generateStartDate(for: dayDate)
-        for _ in 1...numberOfEvents {
+        for _ in 0...numberOfEvents {
             let event = Event(identifier: UUID().uuidString,
-                          title: generateEventTitle(),
-                          location: generateLocation(),
-                          startDate: lastDate,
-                          duration: generateDuration())
+                              title: generateEventTitle(),
+                              location: generateLocation(),
+                              startDate: lastDate,
+                              duration: generateDuration())
             
             // Generate events just for current day
             if lastDate.timeIntervalSince1970 < dayDate.timeIntervalSince1970 + TimeInterval.day {

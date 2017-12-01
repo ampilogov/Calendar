@@ -10,6 +10,5 @@ import Foundation
 
 class Const {
     static let initialDate = Date(timeIntervalSince1970: 1325376000) // 01.01.2012
-    static let finalDate = "01.01.2020"
-    static let daysInterval = 3000
+    static let daysInterval = 7000
 }

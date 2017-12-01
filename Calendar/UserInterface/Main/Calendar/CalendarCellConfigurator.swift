@@ -12,6 +12,7 @@ class CalendarCellConfigurator {
     
     lazy var monthFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM"
         return dateFormatter
     }()
     
@@ -23,7 +24,7 @@ class CalendarCellConfigurator {
             
             // Special format for first day in month
             if day == 1 {
-                dateText.append(self.monthFormatter.string(from: date))
+                dateText = self.monthFormatter.string(from: date) + "\n"
             }
             dateText.append(String(day))
             
@@ -32,7 +33,7 @@ class CalendarCellConfigurator {
             let color: UIColor = month % 2 == 0 ? .flatGray : .white
             
             DispatchQueue.main.async {
-                cell.containerView.backgroundColor = color
+                cell.backgroundColor = color
                 cell.titleLabel.text = dateText
             }
         }

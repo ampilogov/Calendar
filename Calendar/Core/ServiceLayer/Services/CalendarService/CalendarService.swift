@@ -10,8 +10,7 @@ import CoreData
 
 protocol ICalendarService {
     
-    func cachedEvents() -> [Event]
-    
+    func obtainEvents() -> [Event]
 }
 
 class CalendarService: ICalendarService {
@@ -26,8 +25,9 @@ class CalendarService: ICalendarService {
         self.storage = storage
     }
     
-    func cachedEvents() -> [Event] {
-        let events = self.storage.fetch(Event.self)
+    func obtainEvents() -> [Event] {
+        let sortDescriptor = NSSortDescriptor(key: "startDate", ascending: true)
+        let events = self.storage.fetch(Event.self, sortDescriptor: sortDescriptor)
         return events
     }
 }

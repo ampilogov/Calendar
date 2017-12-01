@@ -19,7 +19,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     weak var delegate: AgendaViewControllerDelegate?
     private let dateHelper = DateHelper()
     private let dataManager = AgendaDataManager()
-    lazy var eventsInDays = self.dataManager.eventsInDays()
+    lazy var eventsInDays = self.dataManager.obtainEventsInDays()
     
     // MARK: - IDayUpdatable Prorocol
     

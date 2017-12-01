@@ -15,4 +15,12 @@ extension Date {
         components.day = numberOfDays
         return Calendar.current.date(byAdding: components, to: self) ?? self
     }
+    
+    func numberOfDays(from date: Date) -> Int {
+        let date1 = Calendar.current.startOfDay(for: self)
+        let date2 = Calendar.current.startOfDay(for: date)
+        let components = Calendar.current.dateComponents([.day], from: date2, to: date1)
+        
+        return components.day ?? 0
+    }
 }

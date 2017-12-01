@@ -13,6 +13,8 @@ protocol IStorage: class {
     // Fetch models from Data Base
     func fetch<Model: Persistable>(_ modelType: Model.Type) -> [Model]
     
+    func fetch<Model: Persistable>(_ modelType: Model.Type, sortDescriptor: NSSortDescriptor?) -> [Model]
+    
     // Save models to Data Base
     func save<Model: Persistable>(_ models: [Model])
 }
@@ -59,9 +61,24 @@ class Storage: IStorage {
     
     // MARK: - IStorage Protocol
     
+    func fetch<Model: Persistable>(_ modelType: Model.Type,
+                                   sortDescriptor: NSSortDescriptor?) -> [Model] {
+        return fetch(Model.self, predicate: nil, sortDescriptor: sortDescriptor)
+    }
+    
     func fetch<Model: Persistable>(_ modelType: Model.Type) -> [Model] {
+        return fetch(Model.self, predicate: nil, sortDescriptor: nil)
+    }
+    
+    func fetch<Model: Persistable>(_ modelType: Model.Type,
+                                   predicate: NSPredicate? = nil,
+                                   sortDescriptor: NSSortDescriptor? = nil) -> [Model] {
         let context = contextForCurrentThread()
         let request = NSFetchRequest<Model.DBType>(entityName: Model.DBType.entityName)
+        request.predicate = predicate
+        if let sortDescriptor = sortDescriptor {
+            request.sortDescriptors = [sortDescriptor]
+        }
         var result = [Model]()
         
         context.performAndWait {

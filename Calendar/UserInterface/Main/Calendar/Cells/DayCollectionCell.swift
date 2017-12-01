@@ -9,15 +9,32 @@
 import UIKit
 
 class DayCollectionCell: UICollectionViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var selectingView: UIView!
-    @IBOutlet weak var containerView: UIView!
+    let titleLabel: UILabel
+    let selectingView: UIView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       
+    override init(frame: CGRect) {
+        self.titleLabel = UILabel()
+        self.selectingView = RoundedView()
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init with coder not implemented")
+    }
+    
+    func setupUI() {
         selectingView.backgroundColor = .flatBlue
+        selectingView.isHidden = true
+        contentView.addSubview(selectingView)
+        selectingView.pinToSuperviewEdges()
+        
         titleLabel.textColor = .gray
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        contentView.addSubview(titleLabel)
+        titleLabel.pinToSuperviewCenter()
+        
     }
     
     override var isSelected: Bool {
