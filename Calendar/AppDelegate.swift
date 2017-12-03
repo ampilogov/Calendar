@@ -14,18 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // Dependencies
-    let calendarInitializator = Locator.shared.calendarInitializator()
+    private let eventsGenerator = Locator.shared.eventsGenerator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+        eventsGenerator.createStaticEventsIfNeed()
+        self.window = UIWindow()
         self.window?.backgroundColor = .white
-        
-        calendarInitializator.initializeCalendar {
-            let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let vc = sb.instantiateViewController(withIdentifier: "MainVC")
-            self.window?.rootViewController  = vc
-        }
-        
+        let nc = UINavigationController(rootViewController: MainViewController())
+        self.window?.rootViewController = nc
+        self.window?.makeKeyAndVisible()
         return true
     }
 }

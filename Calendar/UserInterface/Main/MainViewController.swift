@@ -15,10 +15,18 @@ protocol SizeDelegate: class {
 
 class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
-    @IBOutlet weak var weekDaysStackView: UIStackView!
-    @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
+    private let weekDaysStackView = UIStackView()
+    private let calendarContainerView = UIView()
+    private let agendaContainerView = UIView()
+    private var calendarHeightConstraint: NSLayoutConstraint?
     
-    private var calendarSynchronizer: CalendarSynchronizer?
+    private let calendarViewController = CalendarViewController()
+    private let agendaViewController = AgendaViewController()
+    private lazy var calendarSynchronizer = {
+        return CalendarSynchronizer(calendarViewController: calendarViewController,
+                                    agendaViewController: agendaViewController,
+                                    mainViewController: self)
+    }()
     
     lazy private var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -30,12 +38,8 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         super.viewDidLoad()
         setupNavigationBar()
         setupWeekDaysView()
-        setupView()
-    }
-    
-    private func setupView() {
-        view.alpha = 0
-        calendarHeightConstraint.constant = SizeManager.calendarCollapsedHeight
+        setupCalendar()
+        setupAgenda()
     }
     
     private func setupNavigationBar() {
@@ -44,6 +48,13 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     }
     
     private func setupWeekDaysView() {
+        weekDaysStackView.distribution = .fillEqually
+        view.addSubview(weekDaysStackView)
+        weekDaysStackView.translatesAutoresizingMaskIntoConstraints = false
+        weekDaysStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        weekDaysStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        weekDaysStackView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        
         for daySymbol in Calendar.current.veryShortWeekdaySymbols {
             let dayLabel = UILabel()
             dayLabel.text = daySymbol
@@ -53,29 +64,39 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        UIView.animate(withDuration: 0.3) {
-            self.view.alpha = 1
-        }
-        self.calendarSynchronizer = createSynchronizer()
+    private func setupCalendar() {
+        view.addSubview(calendarContainerView)
+        calendarContainerView.translatesAutoresizingMaskIntoConstraints = false
+        calendarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        calendarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        calendarContainerView.topAnchor.constraint(equalTo: weekDaysStackView.bottomAnchor, constant: 10).isActive = true
+        calendarHeightConstraint = calendarContainerView.heightAnchor.constraint(equalToConstant: SizeManager.calendarCollapsedHeight)
+        calendarHeightConstraint?.isActive = true
+        
+        self.addChildViewController(calendarViewController)
+        calendarContainerView.addSubview(calendarViewController.view)
+        calendarViewController.didMove(toParentViewController: self)
+        calendarViewController.view.pinToSuperviewEdges()
     }
     
-    private func createSynchronizer() -> CalendarSynchronizer? {
-        
-        var synchronizer: CalendarSynchronizer?
-        if let agendaVC = childViewController(forClass: AgendaViewController.self),
-            let calendarVC = childViewController(forClass: CalendarViewController.self) {
+    func setupAgenda() {
+        view.addSubview(agendaContainerView)
+        agendaContainerView.translatesAutoresizingMaskIntoConstraints = false
+        agendaContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        agendaContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        agendaContainerView.topAnchor.constraint(equalTo: calendarContainerView.bottomAnchor).isActive = true
+        agendaContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-            synchronizer = CalendarSynchronizer(calendarViewController: calendarVC,
-                                                agendaViewController: agendaVC,
-                                                mainViewController: self)
-            calendarVC.delegate = synchronizer
-            agendaVC.delegate = synchronizer
-        }
-        
-        return synchronizer
+        self.addChildViewController(agendaViewController)
+        agendaContainerView.addSubview(agendaViewController.view)
+        agendaViewController.didMove(toParentViewController: self)
+        agendaViewController.view.pinToSuperviewEdges()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        calendarViewController.delegate = self.calendarSynchronizer
+        agendaViewController.delegate = self.calendarSynchronizer
     }
     
     // MARK: - IDayUpdatable
@@ -87,14 +108,14 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     // MARK: - IScrollHandler
     
     func didBeginScrollCalendar() {
-        calendarHeightConstraint.constant = SizeManager.calendarDefaultHeight
+        calendarHeightConstraint?.constant = SizeManager.calendarDefaultHeight
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
     func didBeginScrollAgenda() {
-        calendarHeightConstraint.constant = SizeManager.calendarCollapsedHeight
+        calendarHeightConstraint?.constant = SizeManager.calendarCollapsedHeight
         UIView.animate(withDuration: 0.3) { 
             self.view.layoutIfNeeded()
         }

@@ -8,39 +8,33 @@
 
 import CoreData
 
-protocol IEventsCreator {
+protocol IEventsGenerator {
     
     // Create random events for days in Data Base
-    func createStaticEvents(completion: @escaping () -> Swift.Void)
+    func createStaticEventsIfNeed()
 }
 
-class EventsCreator: IEventsCreator {
+class EventsGenerator: IEventsGenerator {
     
     let storage: IStorage
-    let calendarService: ICalendarService
     let generator: IStaticDataGenerator
     
     let daysWithEvents = 20
     
-    init(storage: IStorage, calendarService: ICalendarService, dataGenerator: IStaticDataGenerator) {
+    init(storage: IStorage, dataGenerator: IStaticDataGenerator) {
         self.storage = storage
-        self.calendarService = calendarService
         self.generator = dataGenerator
     }
     
-    func createStaticEvents(completion: @escaping () -> Swift.Void) {
+    func createStaticEventsIfNeed() {
         
-        guard self.storage.fetch(Event.self).count == 0 else {
-            completion()
-            return
-        }
+        let needToCreateEvents = self.storage.fetch(Event.self).count == 0
+        if !needToCreateEvents { return }
         
         for i in 0...self.daysWithEvents {
             let date = Calendar.current.startOfDay(for: Date().date(byAddingDays: i))
             let events = self.generator.generateEvents(for: date)
             self.storage.save(events)
         }
-        
-        completion()
     }
 }

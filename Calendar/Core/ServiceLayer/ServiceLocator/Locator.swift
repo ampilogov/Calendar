@@ -15,26 +15,20 @@ class Locator {
     private var services = [String: Any]()
     
     init() {
-        services[String(describing: type(of: IStorage.self))] = Storage()
+        services["\(IStorage.self)"] = Storage()
     }
     
     func storage() -> IStorage! {
-        return services[String(describing: type(of: IStorage.self))] as? IStorage
-    }
-    
-    func calendarInitializator() -> ICalendarInitializator {
-        return CalendarInitializator(storage: storage(),
-                                     eventsCreator: eventsCreator())
+        return services["\(IStorage.self)"] as? IStorage
     }
     
     func calendarService() -> ICalendarService {
         return CalendarService(storage: storage())
     }
     
-    func eventsCreator() -> IEventsCreator {
-        return EventsCreator(storage: storage(),
-                             calendarService: calendarService(),
-                             dataGenerator: staticDataGenerator())
+    func eventsGenerator() -> IEventsGenerator {
+        return EventsGenerator(storage: storage(),
+                               dataGenerator: staticDataGenerator())
     }
     
     func staticDataGenerator() -> IStaticDataGenerator {
