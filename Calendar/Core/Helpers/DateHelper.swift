@@ -9,13 +9,7 @@
 import Foundation
 
 class DateHelper {
-    
-//    lazy var initialDate: Date = {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd.MM.yyyy"
-//        return dateFormatter.date(from: Const.initialDate) ?? Date()
-//    }()
-    
+        
     lazy var daysFromInitialDate: Int = {
         let days = Calendar.current.dateComponents([.day], from: Const.initialDate, to: Date()).day ?? 0
         return days

@@ -10,17 +10,8 @@ import UIKit
 
 class AgendaCellConfigurator {
 
-    lazy var timeFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        return dateFormatter
-    }()
-    
-    lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        return dateFormatter
-    }()
+    let timeFormatter = DateFormatter(style: .time)
+    let dateFormatter = DateFormatter(style: .full)
     
     func configure(_ eventCell: EventCell, with event: Event) {
         let duration = String(Int(event.duration / 60 / 60)) + " h"

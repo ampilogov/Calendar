@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Const {
+struct Const {
     static let initialDate = Date(timeIntervalSince1970: 1325376000) // 01.01.2012
     static let daysInterval = 7000
 }

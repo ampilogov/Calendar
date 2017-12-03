@@ -10,11 +10,7 @@ import UIKit
 
 class CalendarCellConfigurator {
     
-    lazy var monthFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM"
-        return dateFormatter
-    }()
+    let monthFormatter = DateFormatter(style: .month)
     
     func configure(_ cell: DayCollectionCell, with date: Date) {
         

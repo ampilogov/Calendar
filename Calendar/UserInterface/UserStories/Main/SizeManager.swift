@@ -17,7 +17,7 @@ class SizeManager {
     static let screenWidth = UIApplication.shared.delegate?.window??.frame.size.width ?? 0
     
     static var dayItemHeight: CGFloat {
-        return screenWidth / CGFloat(Calendar.current.daysInWeek)
+        return screenWidth / CGFloat(Calendar.current.weekdaySymbols.count)
     }
     
     static var calendarDefaultHeight: CGFloat {

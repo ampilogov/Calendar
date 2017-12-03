@@ -11,8 +11,8 @@ import UIKit
 class CalendarLayout: UICollectionViewFlowLayout {
     
     // Rects for separator decoration view
-    var separatorViewsRects = [IndexPath: CGRect]()
-    let daysInWeek = Calendar.current.daysInWeek
+    private var separatorViewsRects = [IndexPath: CGRect]()
+    private let daysInWeek = Calendar.current.weekdaySymbols.count
     
     override init() {
         super.init()
