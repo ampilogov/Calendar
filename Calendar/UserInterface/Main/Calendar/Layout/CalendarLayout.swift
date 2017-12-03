@@ -14,17 +14,23 @@ class CalendarLayout: UICollectionViewFlowLayout {
     var separatorViewsRects = [IndexPath: CGRect]()
     let daysInWeek = Calendar.current.daysInWeek
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override init() {
+        super.init()
         
         self.minimumLineSpacing = 0
         self.minimumInteritemSpacing = 0
-        
         self.register(SeparatorView.self, forDecorationViewOfKind: SeparatorView.className)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fatalError("init with coder not implemented")
     }
     
     override func prepare() {
         super.prepare()
+        
+        itemSize = CGSize(width: SizeManager.dayItemWidth, height: SizeManager.dayItemHeight)
         
         let numberOfItems = collectionView?.numberOfItems(inSection: 0) ?? 0
         let rowHeight = SizeManager.dayItemHeight

@@ -9,9 +9,13 @@
 import UIKit
 import CoreData
 
+private extension CGFloat {
+    static let eventRowHeight: CGFloat = 60
+}
+
 class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var tableView: UITableView!
+    private let tableView = UITableView()
     
     private let calendarService = Locator.shared.calendarService()
     private let configurator = AgendaCellConfigurator()
@@ -23,9 +27,17 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupTableView()
+    }
+    
+    func setupTableView() {
+        view.addSubview(tableView)
+        tableView.pinToSuperviewEdges()
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(EventCell.self, forCellReuseIdentifier: EventCell.className)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+        tableView.rowHeight = .eventRowHeight
     }
     
     // MARK: - IDayUpdatable Prorocol
@@ -98,15 +110,9 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        handleDayChange()
-    }
-
-    // MARK: - IDayUpdatable
-    
-    private func handleDayChange() {
         guard let firstVisibleCell = tableView.visibleCells.first,
             let indexPath = tableView.indexPath(for: firstVisibleCell) else {
-            return
+                return
         }
         delegate?.agendaDidScrollToDay(at: indexPath.section)
     }

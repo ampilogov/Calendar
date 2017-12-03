@@ -11,7 +11,7 @@ import CoreData
 
 class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarLayout())
     
     private let calendarService = Locator.shared.calendarService()
     private let configurator = CalendarCellConfigurator()
@@ -27,10 +27,15 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     }
     
     private func configureCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.pinToSuperviewEdges()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.isPrefetchingEnabled = true
+        collectionView.backgroundColor = .white
+        
         collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: SizeManager.dayItemWidth, height: SizeManager.dayItemHeight)
-        }
     }
     
     // MARK: - IDayUpdatable
