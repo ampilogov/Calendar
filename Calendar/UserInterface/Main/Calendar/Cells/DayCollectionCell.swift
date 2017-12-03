@@ -34,7 +34,6 @@ class DayCollectionCell: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         contentView.addSubview(titleLabel)
         titleLabel.pinToSuperviewCenter()
-        
     }
     
     override var isSelected: Bool {

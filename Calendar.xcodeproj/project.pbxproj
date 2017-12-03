@@ -14,6 +14,7 @@
 		0090E47A1FCC9AE60084B18C /* AgendaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */; };
 		0090E47C1FCC9BFE0084B18C /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E47B1FCC9BFE0084B18C /* Aliases.swift */; };
 		0090E4831FD125AF0084B18C /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4821FD125AF0084B18C /* UIView+Layout.swift */; };
+		0090E4931FD41E2D0084B18C /* CGFloat+Margins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4921FD41E2D0084B18C /* CGFloat+Margins.swift */; };
 		00FF1E111FC9619B00AA234C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD61FC9619B00AA234C /* Storage.swift */; };
 		00FF1E121FC9619B00AA234C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DD71FC9619B00AA234C /* DataModel.xcdatamodeld */; };
 		00FF1E131FC9619B00AA234C /* Locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF1DDA1FC9619B00AA234C /* Locator.swift */; };
@@ -69,6 +70,7 @@
 		0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDataManager.swift; sourceTree = "<group>"; };
 		0090E47B1FCC9BFE0084B18C /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		0090E4821FD125AF0084B18C /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		0090E4921FD41E2D0084B18C /* CGFloat+Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Margins.swift"; sourceTree = "<group>"; };
 		00FF1DD61FC9619B00AA234C /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00FF1DD81FC9619B00AA234C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		00FF1DDA1FC9619B00AA234C /* Locator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locator.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		00FF1DEB1FC9619B00AA234C /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				0090E4921FD41E2D0084B18C /* CGFloat+Margins.swift */,
 				000535161FC9880C00C13A0A /* Const.swift */,
 				0090E47B1FCC9BFE0084B18C /* Aliases.swift */,
 			);
@@ -644,6 +647,7 @@
 				00FF1E201FC9619B00AA234C /* Array+Elements.swift in Sources */,
 				00FF1E2C1FC9619B00AA234C /* AgendaCellConfigurator.swift in Sources */,
 				00FF1E271FC9619B00AA234C /* CalendarCellConfigurator.swift in Sources */,
+				0090E4931FD41E2D0084B18C /* CGFloat+Margins.swift in Sources */,
 				00FF1E111FC9619B00AA234C /* Storage.swift in Sources */,
 				0090E4831FD125AF0084B18C /* UIView+Layout.swift in Sources */,
 			);

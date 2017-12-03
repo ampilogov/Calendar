@@ -21,6 +21,13 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     private let dataManager = AgendaDataManager()
     lazy var eventsInDays = self.dataManager.obtainEventsInDays()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(EventCell.self, forCellReuseIdentifier: EventCell.className)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
+    }
+    
     // MARK: - IDayUpdatable Prorocol
     
     func setupDay(at index: Int, animated: Bool) {
@@ -52,7 +59,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
             configurator.configure(eventCell, with: events[indexPath.row])
             cell = eventCell
         } else {
-            cell = UITableViewCell()
+            cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath)
             configurator.configure(emptyCell: cell)
         }
         
