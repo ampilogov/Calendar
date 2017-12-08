@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarLayout())
     
     private let calendarService = Locator.shared.calendarService()
+    let forecastService = Locator.shared.forecastService()
     private let configurator = CalendarCellConfigurator()
     private let dateHelper = DateHelper()
     
@@ -24,6 +26,10 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        
+        forecastService.loadForecast(for: CLLocationCoordinate2D(latitude: 56, longitude: 56)) { (result) in
+            
+        }
     }
     
     private func configureCollectionView() {

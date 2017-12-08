@@ -21,7 +21,7 @@ enum WebApi {
     var host: String {
         switch self {
         case .darkSky:
-            return "https://api.darksky.net"
+            return "api.darksky.net"
         }
     }
 }

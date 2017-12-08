@@ -22,8 +22,25 @@ class Locator {
         return services["\(IStorage.self)"] as? IStorage
     }
     
+    func requestManager() -> IRequestManager {
+        return RequestManager(requestBuilder: requestBuilder(),
+                              responseParser: responseParser())
+    }
+    
+    func requestBuilder() -> IRequestBuilder {
+        return RequestBuilder()
+    }
+    
+    func responseParser() -> IResponseParser {
+        return ResponseParser()
+    }
+    
     func calendarService() -> ICalendarService {
         return CalendarService(storage: storage())
+    }
+    
+    func forecastService() -> IForecastService {
+        return ForecastService(requestManager: requestManager())
     }
     
     func eventsGenerator() -> IEventsGenerator {

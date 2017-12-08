@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherRequest {
+struct ForecastRequest {
     
     private let latitude: Double
     private let longitude: Double
@@ -19,9 +19,11 @@ struct WeatherRequest {
     }
 }
 
-extension WeatherRequest: Request {
-    
-    typealias Model = Weather
+extension ForecastRequest: ModelRequest {
+    typealias Model = Forecast
+    var payloadPath: [String] {
+        return ["daily", "data"]
+    }
     
     var host: String {
         return WebApi.darkSky.host
@@ -36,7 +38,7 @@ extension WeatherRequest: Request {
     }
     
     var GETParameters: [String: String] {
-        return ["units": "auto"]
+        return ["units": "si"]
     }
     
 }
