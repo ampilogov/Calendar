@@ -13,12 +13,7 @@ import CoreLocation
 class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarLayout())
-    
-    private let calendarService = Locator.shared.calendarService()
-    let forecastService = Locator.shared.forecastService()
-    private let configurator = CalendarCellConfigurator()
     private let dateHelper = DateHelper()
-    
     weak var delegate: CalendarViewControllerDelegate?
     
     // MARK: - Livecycle
@@ -26,10 +21,6 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        
-        forecastService.loadForecast(for: CLLocationCoordinate2D(latitude: 56, longitude: 56)) { (result) in
-            
-        }
     }
     
     private func configureCollectionView() {
@@ -38,10 +29,15 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.isPrefetchingEnabled = true
+        collectionView.isPrefetchingEnabled = false
         collectionView.backgroundColor = .white
         
         collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupDay(at: dateHelper.daysFromInitialDate, animated: false)
     }
     
     // MARK: - IDayUpdatable
@@ -73,7 +69,9 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionCell.className, for: indexPath)
         if let cell = cell as? DayCollectionCell {
-            configurator.configure(cell, with: Const.initialDate.date(byAddingDays: indexPath.row))
+            let date = Const.initialDate.date(byAddingDays: indexPath.row)
+            cell.backgroundColor = dateHelper.calendarDateColor(for: date)
+            cell.titleLabel.text = dateHelper.calendarDateText(for: date)
         }
         
         return cell

@@ -9,18 +9,17 @@
 import Foundation
 
 struct Forecast {
-    
-    let icon: String
     let date: TimeInterval
     let summary: String
     let temperature: Double
+    let iconName: String
 }
 
 extension Forecast: Parsable {
     
     static func fromJSON(_ json: [String : AnyHashable]) -> Forecast? {
         
-        guard let icon = json["icon"] as? String,
+        guard let iconName = json["icon"] as? String,
             let date = json["time"] as? Double,
             let summary = json["summary"] as? String,
             let temperatureLow = json["temperatureLow"] as? Double,
@@ -31,10 +30,10 @@ extension Forecast: Parsable {
         
         let temperature = (temperatureLow + temperatureHigh) / 2
         
-        return Forecast(icon: icon,
-                        date: date,
+        return Forecast(date: date,
                         summary: summary,
-                        temperature: temperature)
+                        temperature: temperature,
+                        iconName: iconName)
     }
     
 }

@@ -11,6 +11,8 @@ import Foundation
 class AgendaDataManager {
     
     let calendarService = Locator.shared.calendarService()
+    let locationService = Locator.shared.locationService()
+    let forecastService = Locator.shared.forecastService()
     
     func obtainEventsInDays() -> [DayIndex: [Event]] {
         let events = calendarService.obtainEvents()
@@ -26,6 +28,38 @@ class AgendaDataManager {
         }
         
         return eventsInDays
+    }
+    
+    func loadForecastsForDays(completion: @escaping ([DayIndex: ForecastViewModel]) -> Void) {
+        loadForecast { (forecasts) in
+            var forecastsInDays = [DayIndex: ForecastViewModel]()
+            for forecast in forecasts {
+                let date = Date(timeIntervalSince1970: forecast.date)
+                let dayIndex = date.numberOfDays(from: Const.initialDate)
+                forecastsInDays[dayIndex] = ForecastViewModel(forecast)
+            }
+            DispatchQueue.main.async {
+                completion(forecastsInDays)
+            }
+        }
+    }
+    
+    private func loadForecast(completion: @escaping ([Forecast]) -> Void) {
+        locationService.locate { [weak self] (location) in
+            guard let location = location else {
+                completion([])
+                return
+            }
+            
+            self?.forecastService.loadForecast(for: location.coordinate, completion: { (result) in
+                switch result {
+                case .success(let results):
+                    completion(results)
+                case .fail(_):
+                    completion([])
+                }
+            })
+        }
     }
     
 }

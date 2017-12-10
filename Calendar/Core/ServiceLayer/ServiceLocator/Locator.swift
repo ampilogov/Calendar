@@ -31,6 +31,10 @@ class Locator {
         return RequestBuilder()
     }
     
+    func locationService() -> ILocationService {
+        return LocationService()
+    }
+    
     func responseParser() -> IResponseParser {
         return ResponseParser()
     }

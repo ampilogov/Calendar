@@ -32,7 +32,6 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
     }
     
     private let calendarService = Locator.shared.calendarService()
-    private let dateHelper = DateHelper()
     private var state = State.synchronized
     
     unowned var calendarViewController: IDayUpdatable
@@ -46,12 +45,6 @@ class CalendarSynchronizer: CalendarViewControllerDelegate, AgendaViewController
         self.calendarViewController = calendarViewController
         self.agendaViewController = agendaViewController
         self.mainViewController = mainViewController
-        
-        // Initial day is curent day in calendar and agenda
-        let startDay = dateHelper.daysFromInitialDate
-        calendarViewController.setupDay(at: startDay, animated: false)
-        agendaViewController.setupDay(at: startDay, animated: false)
-        mainViewController.setupDay(at: startDay, animated: false)
     }
     
     // MARK: - AgendaViewControllerDelegate

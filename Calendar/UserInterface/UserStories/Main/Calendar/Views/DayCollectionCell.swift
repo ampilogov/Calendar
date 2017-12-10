@@ -8,13 +8,19 @@
 
 import UIKit
 
+private extension CGFloat {
+    static let selectionMargin: CGFloat = 4
+}
+
+private extension UIFont {
+    static let dateFont = UIFont.systemFont(ofSize: 16)
+}
+
 class DayCollectionCell: UICollectionViewCell {
-    let titleLabel: UILabel
-    let selectingView: UIView!
+    let titleLabel: UILabel = UILabel()
+    let selectingView: UIView = RoundedView()
     
     override init(frame: CGRect) {
-        self.titleLabel = UILabel()
-        self.selectingView = RoundedView()
         super.init(frame: frame)
         setupUI()
     }
@@ -27,11 +33,12 @@ class DayCollectionCell: UICollectionViewCell {
         selectingView.backgroundColor = .flatBlue
         selectingView.isHidden = true
         contentView.addSubview(selectingView)
-        selectingView.pinToSuperviewEdges()
+        selectingView.pinToSuperview(margin: .selectionMargin)
         
         titleLabel.textColor = .gray
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
+        titleLabel.font = .dateFont
         contentView.addSubview(titleLabel)
         titleLabel.pinToSuperviewCenter()
     }

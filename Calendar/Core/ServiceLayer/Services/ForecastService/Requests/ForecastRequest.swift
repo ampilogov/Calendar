@@ -38,7 +38,7 @@ extension ForecastRequest: ModelRequest {
     }
     
     var GETParameters: [String: String] {
-        return ["units": "si"]
+        return ["units": "us"]
     }
     
 }

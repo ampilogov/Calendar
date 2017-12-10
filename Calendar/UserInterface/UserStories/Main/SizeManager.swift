@@ -25,6 +25,6 @@ class SizeManager {
     }
     
     static var calendarCollapsedHeight: CGFloat {
-        return dayItemHeight * 2 + separatorHeight
+        return dayItemHeight * 2
     }
 }

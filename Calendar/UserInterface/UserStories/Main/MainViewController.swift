@@ -17,6 +17,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     private let weekDaysStackView = WeekDaysView()
     private let calendarContainerView = UIView()
+    private let calendarSeparator = UIView()
     private let agendaContainerView = UIView()
     private var calendarHeightConstraint: NSLayoutConstraint?
     
@@ -54,6 +55,11 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         calendarHeightConstraint = calendarContainerView.heightAnchor.constraint(equalToConstant: SizeManager.calendarCollapsedHeight)
         calendarHeightConstraint?.isActive = true
         
+        calendarSeparator.backgroundColor = .gray
+        view.addSubview(calendarSeparator)
+        calendarSeparator.pin(leading: view.leadingAnchor, top: calendarContainerView.bottomAnchor, trailing: view.trailingAnchor)
+        calendarSeparator.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale).isActive = true
+        
         self.addChildViewController(calendarViewController)
         calendarContainerView.addSubview(calendarViewController.view)
         calendarViewController.didMove(toParentViewController: self)
@@ -64,7 +70,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     func setupAgenda() {
         view.addSubview(agendaContainerView)
         agendaContainerView.pin(leading: view.leadingAnchor,
-                                top: calendarContainerView.bottomAnchor,
+                                top: calendarSeparator.bottomAnchor,
                                 trailing: view.trailingAnchor,
                                 bottom: view.bottomAnchor)
 
@@ -72,6 +78,10 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         agendaContainerView.addSubview(agendaViewController.view)
         agendaViewController.didMove(toParentViewController: self)
         agendaViewController.view.pinToSuperviewEdges()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     func setupSynchronizer() {

@@ -26,6 +26,23 @@ extension UIView {
         bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
     }
     
+    func pinToSuperview(margin: CGFloat = 0) {
+        pinToSuperview(leading: margin, top: margin, trailing: margin, bottom: margin)
+    }
+    
+    func pinToSuperview(leading: CGFloat = 0,
+                        top: CGFloat = 0,
+                        trailing: CGFloat = 0,
+                        bottom: CGFloat = 0) {
+        
+        guard  let superview = superview else { return }
+        enableAutolayoutIfNeeded()
+        leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: leading).isActive = true
+        topAnchor.constraint(equalTo: superview.topAnchor, constant: top).isActive = true
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -trailing).isActive = true
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -bottom).isActive = true
+    }
+    
     func pin(leading: NSLayoutXAxisAnchor? = nil,
              top: NSLayoutYAxisAnchor? = nil,
              trailing: NSLayoutXAxisAnchor? = nil,
