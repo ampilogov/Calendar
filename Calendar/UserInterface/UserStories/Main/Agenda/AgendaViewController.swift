@@ -24,9 +24,9 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     private let dateFormatter = DateFormatter(style: .full)
     private let timeFormatter = DateFormatter(style: .time)
     
-    lazy var eventsInDays = self.dataManager.obtainEventsInDays()
-    lazy var forecastsForDays = [DayIndex: ForecastViewModel]()
-    var currentDay: DayIndex?
+    private lazy var eventsInDays = self.dataManager.obtainEventsInDays()
+    private lazy var forecastsForDays = [DayIndex: ForecastViewModel]()
+    private var currentDay: DayIndex?
     
     override func viewDidLoad() {
         super.viewDidLoad()

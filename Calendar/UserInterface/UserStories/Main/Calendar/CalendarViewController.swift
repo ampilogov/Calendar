@@ -15,6 +15,7 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarLayout())
     private let dateHelper = DateHelper()
     weak var delegate: CalendarViewControllerDelegate?
+    private var currentDay: DayIndex?
     
     // MARK: - Livecycle
     
@@ -35,9 +36,18 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
         collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if currentDay == nil {
+            // Setup current day on start
+            setupDay(at: dateHelper.daysFromInitialDate, animated: false)
+        }
+    }
+    
     // MARK: - IDayUpdatable
     
     func setupDay(at index: Int, animated: Bool) {
+        currentDay = index
         let indexPath = IndexPath(item: index, section: 0)
         if indexPath == collectionView.indexPathsForSelectedItems?.first { return }
         collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
