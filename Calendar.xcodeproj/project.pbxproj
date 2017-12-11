@@ -14,8 +14,9 @@
 		0005ADA91FDB0F1600642203 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADA81FDB0F1600642203 /* LocationService.swift */; };
 		0005ADAB1FDBF54000642203 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADAA1FDBF54000642203 /* DateHeaderView.swift */; };
 		0005ADAE1FDC24ED00642203 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADAD1FDC24ED00642203 /* ForecastViewModel.swift */; };
-		0005ADB11FDE5AC700642203 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADB01FDE5AC700642203 /* StorageTests.swift */; };
 		0032FF401FDE5C8D00700E59 /* DateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */; };
+		0032FF421FDF222400700E59 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032FF411FDF222400700E59 /* DateTests.swift */; };
+		0032FF461FDF25B600700E59 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032FF451FDF25B600700E59 /* StorageTests.swift */; };
 		005F7C211FD9109800AE8FA3 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F7C201FD9109800AE8FA3 /* ResponseParser.swift */; };
 		0090E47A1FCC9AE60084B18C /* AgendaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */; };
 		0090E47C1FCC9BFE0084B18C /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E47B1FCC9BFE0084B18C /* Aliases.swift */; };
@@ -55,7 +56,6 @@
 		312B22741DF2EB270071E867 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B22731DF2EB270071E867 /* AppDelegate.swift */; };
 		312B227E1DF2EB270071E867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312B227D1DF2EB270071E867 /* Assets.xcassets */; };
 		312B22811DF2EB270071E867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312B227F1DF2EB270071E867 /* LaunchScreen.storyboard */; };
-		312B228C1DF2EB270071E867 /* CalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B228B1DF2EB270071E867 /* CalendarTests.swift */; };
 		31F94AFD1E1024BF00ED804A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 31F94AFC1E1024BF00ED804A /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +77,9 @@
 		0005ADA81FDB0F1600642203 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		0005ADAA1FDBF54000642203 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		0005ADAD1FDC24ED00642203 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
-		0005ADB01FDE5AC700642203 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelperTests.swift; sourceTree = "<group>"; };
+		0032FF411FDF222400700E59 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		0032FF451FDF25B600700E59 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		005F7C201FD9109800AE8FA3 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
 		0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDataManager.swift; sourceTree = "<group>"; };
 		0090E47B1FCC9BFE0084B18C /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		312B22801DF2EB270071E867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		312B22821DF2EB270071E867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		312B22871DF2EB270071E867 /* CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		312B228B1DF2EB270071E867 /* CalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTests.swift; sourceTree = "<group>"; };
 		312B228D1DF2EB270071E867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31F94AFC1E1024BF00ED804A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,12 +177,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0005ADAF1FDE5AA700642203 /* ServiceLayerTests */ = {
+		0005ADAF1FDE5AA700642203 /* CategoriesTests */ = {
 			isa = PBXGroup;
 			children = (
-				0005ADB01FDE5AC700642203 /* StorageTests.swift */,
+				0032FF411FDF222400700E59 /* DateTests.swift */,
 			);
-			path = ServiceLayerTests;
+			path = CategoriesTests;
 			sourceTree = "<group>";
 		};
 		0032FF3E1FDE5C6300700E59 /* HelpersTests */ = {
@@ -191,6 +191,14 @@
 				0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */,
 			);
 			path = HelpersTests;
+			sourceTree = "<group>";
+		};
+		0032FF441FDF258800700E59 /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				0032FF451FDF25B600700E59 /* StorageTests.swift */,
+			);
+			path = ServicesTests;
 			sourceTree = "<group>";
 		};
 		005F7C1F1FD9101E00AE8FA3 /* ResponseParser */ = {
@@ -572,9 +580,9 @@
 		312B228A1DF2EB270071E867 /* CalendarTests */ = {
 			isa = PBXGroup;
 			children = (
-				0005ADAF1FDE5AA700642203 /* ServiceLayerTests */,
+				0032FF441FDF258800700E59 /* ServicesTests */,
+				0005ADAF1FDE5AA700642203 /* CategoriesTests */,
 				0032FF3E1FDE5C6300700E59 /* HelpersTests */,
-				312B228B1DF2EB270071E867 /* CalendarTests.swift */,
 				312B228D1DF2EB270071E867 /* Info.plist */,
 			);
 			path = CalendarTests;
@@ -755,8 +763,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				312B228C1DF2EB270071E867 /* CalendarTests.swift in Sources */,
-				0005ADB11FDE5AC700642203 /* StorageTests.swift in Sources */,
+				0032FF461FDF25B600700E59 /* StorageTests.swift in Sources */,
+				0032FF421FDF222400700E59 /* DateTests.swift in Sources */,
 				0032FF401FDE5C8D00700E59 /* DateHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

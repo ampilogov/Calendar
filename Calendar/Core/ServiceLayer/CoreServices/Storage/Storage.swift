@@ -12,11 +12,13 @@ protocol IStorage: class {
     
     // Fetch models from Data Base
     func fetch<Model: Persistable>(_ modelType: Model.Type) -> [Model]
-    
     func fetch<Model: Persistable>(_ modelType: Model.Type, sortDescriptor: NSSortDescriptor?) -> [Model]
     
     // Save models to Data Base
     func save<Model: Persistable>(_ models: [Model])
+    
+    // Remove models from Data Base
+    func removeAll<Model: Persistable>(_ modelType: Model.Type)
 }
 
 class Storage: IStorage {
@@ -96,6 +98,21 @@ class Storage: IStorage {
     func save<Model: Persistable>(_ models: [Model]) {
         let context = contextForCurrentThread()
         models.forEach({ $0.create(in: context) })
+        saveChanges(in: context)
+    }
+    
+    func removeAll<Model: Persistable>(_ modelType: Model.Type) {
+        let context = contextForCurrentThread()
+        let request = NSFetchRequest<Model.DBType>(entityName: Model.DBType.entityName)
+        context.performAndWait {
+            do {
+                let objects = try context.fetch(request)
+                objects.forEach({ context.delete($0) })
+            } catch {
+                print("Error \(error) while fetching from entity: \(Model.DBType.entityName)")
+            }
+        }
+        
         saveChanges(in: context)
     }
     
