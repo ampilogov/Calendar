@@ -58,7 +58,7 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
         calendarSeparator.backgroundColor = .gray
         view.addSubview(calendarSeparator)
         calendarSeparator.pin(leading: view.leadingAnchor, top: calendarContainerView.bottomAnchor, trailing: view.trailingAnchor)
-        calendarSeparator.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale).isActive = true
+        calendarSeparator.heightAnchor.constraint(equalToConstant: SizeManager.separatorHeight).isActive = true
         
         self.addChildViewController(calendarViewController)
         calendarContainerView.addSubview(calendarViewController.view)

@@ -35,11 +35,6 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
         collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupDay(at: dateHelper.daysFromInitialDate, animated: false)
-    }
-    
     // MARK: - IDayUpdatable
     
     func setupDay(at index: Int, animated: Bool) {

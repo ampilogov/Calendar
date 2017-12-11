@@ -14,6 +14,8 @@
 		0005ADA91FDB0F1600642203 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADA81FDB0F1600642203 /* LocationService.swift */; };
 		0005ADAB1FDBF54000642203 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADAA1FDBF54000642203 /* DateHeaderView.swift */; };
 		0005ADAE1FDC24ED00642203 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADAD1FDC24ED00642203 /* ForecastViewModel.swift */; };
+		0005ADB11FDE5AC700642203 /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0005ADB01FDE5AC700642203 /* StorageTests.swift */; };
+		0032FF401FDE5C8D00700E59 /* DateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */; };
 		005F7C211FD9109800AE8FA3 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F7C201FD9109800AE8FA3 /* ResponseParser.swift */; };
 		0090E47A1FCC9AE60084B18C /* AgendaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */; };
 		0090E47C1FCC9BFE0084B18C /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090E47B1FCC9BFE0084B18C /* Aliases.swift */; };
@@ -75,6 +77,8 @@
 		0005ADA81FDB0F1600642203 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		0005ADAA1FDBF54000642203 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		0005ADAD1FDC24ED00642203 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
+		0005ADB01FDE5AC700642203 /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
+		0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelperTests.swift; sourceTree = "<group>"; };
 		005F7C201FD9109800AE8FA3 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
 		0090E4791FCC9AE60084B18C /* AgendaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDataManager.swift; sourceTree = "<group>"; };
 		0090E47B1FCC9BFE0084B18C /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		000535181FC9890100C13A0A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				00FF1E2E1FC961C200AA234C /* SizeManager.swift */,
 				000535191FC98FAD00C13A0A /* DateHelper.swift */,
 			);
 			path = Helpers;
@@ -170,6 +175,22 @@
 				0005ADAD1FDC24ED00642203 /* ForecastViewModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0005ADAF1FDE5AA700642203 /* ServiceLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0005ADB01FDE5AC700642203 /* StorageTests.swift */,
+			);
+			path = ServiceLayerTests;
+			sourceTree = "<group>";
+		};
+		0032FF3E1FDE5C6300700E59 /* HelpersTests */ = {
+			isa = PBXGroup;
+			children = (
+				0032FF3F1FDE5C8D00700E59 /* DateHelperTests.swift */,
+			);
+			path = HelpersTests;
 			sourceTree = "<group>";
 		};
 		005F7C1F1FD9101E00AE8FA3 /* ResponseParser */ = {
@@ -465,7 +486,6 @@
 			children = (
 				00FF1E001FC9619B00AA234C /* Calendar */,
 				00FF1E0B1FC9619B00AA234C /* Agenda */,
-				00FF1E2E1FC961C200AA234C /* SizeManager.swift */,
 				00FF1E0A1FC9619B00AA234C /* MainViewController.swift */,
 				00FF1E101FC9619B00AA234C /* CalendarSynchronizer.swift */,
 			);
@@ -552,6 +572,8 @@
 		312B228A1DF2EB270071E867 /* CalendarTests */ = {
 			isa = PBXGroup;
 			children = (
+				0005ADAF1FDE5AA700642203 /* ServiceLayerTests */,
+				0032FF3E1FDE5C6300700E59 /* HelpersTests */,
 				312B228B1DF2EB270071E867 /* CalendarTests.swift */,
 				312B228D1DF2EB270071E867 /* Info.plist */,
 			);
@@ -734,6 +756,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				312B228C1DF2EB270071E867 /* CalendarTests.swift in Sources */,
+				0005ADB11FDE5AC700642203 /* StorageTests.swift in Sources */,
+				0032FF401FDE5C8D00700E59 /* DateHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

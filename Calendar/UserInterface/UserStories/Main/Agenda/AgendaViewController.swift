@@ -26,6 +26,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     lazy var eventsInDays = self.dataManager.obtainEventsInDays()
     lazy var forecastsForDays = [DayIndex: ForecastViewModel]()
+    var currentDay: DayIndex?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +57,16 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupDay(at: dateHelper.daysFromInitialDate, animated: false)
+        if currentDay == nil {
+            // Setup current day on start
+            setupDay(at: dateHelper.daysFromInitialDate, animated: false)
+        }
     }
     
     // MARK: - IDayUpdatable Prorocol
     
     func setupDay(at index: Int, animated: Bool) {
+        currentDay = index
         let indexPath = IndexPath(row: 0, section: index)
         tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
     }
