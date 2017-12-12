@@ -13,7 +13,7 @@ private extension CGFloat {
 }
 
 private extension UIFont {
-    static let dateFont = UIFont.systemFont(ofSize: 16)
+    static let dateFont = UIFont.systemFont(ofSize: 15)
 }
 
 class DayCollectionCell: UICollectionViewCell {

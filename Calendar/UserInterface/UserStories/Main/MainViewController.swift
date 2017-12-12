@@ -50,14 +50,16 @@ class MainViewController: UIViewController, IDayUpdatable, SizeDelegate {
     
     private func setupCalendar() {
         view.addSubview(calendarContainerView)
-        calendarContainerView.pin(leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        calendarContainerView.pin(trailing: view.trailingAnchor)
+        calendarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -SizeManager.calendarLeading).isActive = true
         calendarContainerView.topAnchor.constraint(equalTo: weekDaysStackView.bottomAnchor, constant: 10).isActive = true
         calendarHeightConstraint = calendarContainerView.heightAnchor.constraint(equalToConstant: SizeManager.calendarCollapsedHeight)
         calendarHeightConstraint?.isActive = true
         
         calendarSeparator.backgroundColor = .gray
         view.addSubview(calendarSeparator)
-        calendarSeparator.pin(leading: view.leadingAnchor, top: calendarContainerView.bottomAnchor, trailing: view.trailingAnchor)
+        calendarSeparator.pin(leading: view.leadingAnchor, trailing: view.trailingAnchor)
+        calendarSeparator.topAnchor.constraint(equalTo: calendarContainerView.bottomAnchor, constant: -SizeManager.dayItemHeight).isActive = true
         calendarSeparator.heightAnchor.constraint(equalToConstant: SizeManager.separatorHeight).isActive = true
         
         self.addChildViewController(calendarViewController)

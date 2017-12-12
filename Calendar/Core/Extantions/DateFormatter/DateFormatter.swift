@@ -15,6 +15,7 @@ extension DateFormatter {
         case monthYear = "MMMM yyyy"
         case month = "MMM"
         case time = "hh:mm a"
+        case `default` = "dd.MM.yyyy"
     }
     
     convenience init(style: Format) {
