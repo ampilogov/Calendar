@@ -42,6 +42,7 @@ class AgendaViewController: UIViewController, IDayUpdatable, UITableViewDelegate
         tableView.register(EventCell.self, forCellReuseIdentifier: EventCell.className)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.className)
         tableView.register(DateHeaderView.self, forHeaderFooterViewReuseIdentifier: DateHeaderView.className)
+        tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = .eventRowHeight
         tableView.estimatedSectionHeaderHeight = .eventRowHeight
         tableView.estimatedSectionHeaderHeight = .headerHeight

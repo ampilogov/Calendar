@@ -32,6 +32,7 @@ class CalendarViewController: UIViewController, IDayUpdatable, UICollectionViewD
         
         collectionView.isPrefetchingEnabled = false
         collectionView.backgroundColor = .white
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(DayCollectionCell.self, forCellWithReuseIdentifier: DayCollectionCell.className)
     }

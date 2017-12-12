@@ -1,6 +1,8 @@
 
 disabled_rules:
 - trailing_whitespace
+- class_delegate_protocol
+
 
 line_length:
   warning: 150
