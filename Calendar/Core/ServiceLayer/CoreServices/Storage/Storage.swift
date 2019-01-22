@@ -86,7 +86,7 @@ class Storage: IStorage {
         context.performAndWait {
             do {
                 let objects = try context.fetch(request)
-                result = objects.flatMap(Model.fromDB)
+                result = objects.compactMap(Model.fromDB)
             } catch {
                 print("Error \(error) while fetching from entity: \(Model.DBType.entityName)")
             }

@@ -22,7 +22,7 @@ class ResponseParser: IResponseParser {
         if let data = data {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                result = parsePayload(from: json, path: payloadPath).flatMap({ T.fromJSON($0) })
+                result = parsePayload(from: json, path: payloadPath).compactMap({ T.fromJSON($0) })
             } catch let parsingError {
                 throw parsingError
             }
